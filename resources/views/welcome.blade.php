@@ -20,7 +20,7 @@
 <body class=" flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col">
     
 
-<h1 class="text-4xl font-bold text-center mb-6 lg:mb-12">Welcome to <span class="text-blue-600">Chickins Den🐓</span></h1>
+<h1 class="text-4xl font-bold text-center mb-6 lg:mb-12">Welcome to <span class="text-blue-600">Chickins Den🐓☕️</span></h1>
 @if (Route::has('login'))
     <div class="h-14.5 hidden lg:block"></div>
 @endif

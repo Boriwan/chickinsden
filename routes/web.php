@@ -2,8 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\ChickenController;
 
 Route::get('/', [WelcomeController::class, 'index'])->name('home');
+
+Route::get('/chickens', [ChickenController::class, 'index'])->name('chickens');
 
 Route::get('/dashboard', function () {
     return view('userzone.dashboard');

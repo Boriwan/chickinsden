@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Chicken; 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -16,6 +17,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // User::factory(10)->create();
+
+        Chicken::factory(11)->create(); 
 
         User::factory()->create([
             'name' => 'Test User',
