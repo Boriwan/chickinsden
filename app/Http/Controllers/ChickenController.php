@@ -36,15 +36,15 @@ class ChickenController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ChickenModel $chickenModel)
+    public function show(Chicken $chicken)
     {
-        //
+        return $chicken;
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ChickenModel $chickenModel)
+    public function edit(Chicken $chicken)
     {
         //
     }
@@ -52,7 +52,7 @@ class ChickenController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ChickenModel $chickenModel)
+    public function update(Request $request, Chicken $chicken)
     {
         //
     }
@@ -60,7 +60,7 @@ class ChickenController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ChickenModel $chickenModel)
+    public function destroy(Chicken $chicken)
     {
         //
     }

@@ -7,6 +7,8 @@ use App\Http\Controllers\ChickenController;
 Route::get('/', [WelcomeController::class, 'index'])->name('home');
 
 Route::get('/chickens', [ChickenController::class, 'index'])->name('chickens');
+Route::get('/chickens/{chicken}', [ChickenController::class, 'show'])->name('chickens.show');
+
 
 Route::get('/dashboard', function () {
     return view('userzone.dashboard');
