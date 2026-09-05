@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ChickenModel;
+use App\Models\Chicken;
 use Illuminate\Http\Request;
 
 class ChickenController extends Controller
@@ -12,7 +12,9 @@ class ChickenController extends Controller
      */
     public function index()
     {
-        return view('chickens');
+        $chickens = Chicken::all();
+
+        return view('chickens.index', compact('chickens'));
     }
 
     /**
