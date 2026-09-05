@@ -21,26 +21,25 @@
 <body>
 
 <div>
-    <h1>Test den's chickens🐓🪹</h1>
-
-
-        <div>
-            @foreach ($chickens as $chicken)
-            <h2>{{ $chicken->name }}</h2>
-
-            <ul>
-                <li>Gender: {{ $chicken->gender }}</li> 
-                <li>Den: {{ $chicken->den_id }}</li>
-            </ul>
-
-            <img
+    <h1> {{ $chicken->name }} 🐓</h1>
+     <img
                 src="{{ $chicken->image }}"
                 alt="{{ $chicken->name }}"
                 width="200"           
             >
-            <a style="text-decoration: underline; color:blue" href="/chickens/{{ $chicken->id }}">View Details</a>
-        <hr>
-    @endforeach
+        <div>
+
+
+            <ul>
+                <li>Gender: {{ $chicken->gender }}</li>
+                <li>Born: {{ $chicken->born_date }}</li>
+                <li>Breed: {{ $chicken->breed_id }}</li>
+                <li>Height: {{ $chicken->height }} cm</li>
+                <li>Weight: {{ $chicken->weight }}</li>
+                <li>Den: {{ $chicken->den_id }}</li>
+            </ul>
+
+    
      </div>
 </div>
 </body>

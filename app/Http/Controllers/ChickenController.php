@@ -38,7 +38,7 @@ class ChickenController extends Controller
      */
     public function show(Chicken $chicken)
     {
-        return $chicken;
+        return view('chickens.show', compact('chicken'));
     }
 
     /**
