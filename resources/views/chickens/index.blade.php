@@ -36,7 +36,7 @@
             <img
                 src="{{ $chicken->image }}"
                 alt="{{ $chicken->name }}"
-                width="200"           
+                width="200px"           
             >
             <a style="text-decoration: underline; color:blue" href="/chickens/{{ $chicken->id }}">View Details</a>
         <hr>

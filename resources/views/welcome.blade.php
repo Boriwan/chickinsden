@@ -24,5 +24,9 @@
 @if (Route::has('login'))
     <div class="h-14.5 hidden lg:block"></div>
 @endif
+
+<button style="background-color: #f0f0f0; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+    <a href="/chickens">Show my chickens</a>
+</button>
 </body>
 </html>

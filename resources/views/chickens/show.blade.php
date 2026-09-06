@@ -25,7 +25,7 @@
      <img
                 src="{{ $chicken->image }}"
                 alt="{{ $chicken->name }}"
-                width="200"           
+                width="200px"           
             >
         <div>
 
