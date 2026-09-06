@@ -8,9 +8,10 @@
         <meta name="keywords" content="">
     </head>
     <body>
-    <div style="background-color: #f0ce8f; padding: 10px;">
-        Chickins Den🐓🪹☕️ |
-        <a href="\">Home</a>
+    <div style="background-color: #f0ce8f; padding: 15px;">
+        |
+        <a href="\"> Chickins Den🐓🪹☕️</a>
+        |
         <a href="\dens">Dens</a>
           <a href="\chickens">Chickens</a>
     </div>

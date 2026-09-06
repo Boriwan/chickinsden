@@ -7,6 +7,7 @@
                 <p>Created Date: {{ $den->created_date }}</p>
                 <p>User ID: {{ $den->user_id }}</p>
             </div>
+             <hr>
         @endforeach
     </div>
 </x-site-layout>
