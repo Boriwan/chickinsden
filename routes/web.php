@@ -11,6 +11,7 @@ Route::get('/chickens', [ChickenController::class, 'index'])->name('chickens');
 Route::get('/chickens/{chicken}', [ChickenController::class, 'show'])->name('chickens.show');
 
 Route::get('/dens', [DenController::class, 'index'])->name('dens');
+Route::get('/dens/{den}', [DenController::class, 'show'])->name('dens.show');
 
 Route::get('/dashboard', function () {
     return view('userzone.dashboard');

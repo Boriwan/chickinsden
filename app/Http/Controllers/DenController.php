@@ -38,7 +38,7 @@ class DenController extends Controller
      */
     public function show(Den $den)
     {
-        //return view('dens.show', compact('den'));
+        return view('dens.show', compact('den'));
     }
 
     /**

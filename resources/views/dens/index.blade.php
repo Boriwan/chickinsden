@@ -1,4 +1,4 @@
-<div>
+<x-site-layout>
     <h1>My dens🪹</h1>
     <div>
         @foreach ($dens as $den)
@@ -9,4 +9,4 @@
             </div>
         @endforeach
     </div>
-</div>
+</x-site-layout>
