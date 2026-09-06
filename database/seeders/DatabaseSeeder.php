@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\Chicken; 
+use App\Models\Den;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -19,6 +20,8 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         Chicken::factory(11)->create(); 
+
+        Den::factory(3)->create();
 
         User::factory()->create([
             'name' => 'Test User',

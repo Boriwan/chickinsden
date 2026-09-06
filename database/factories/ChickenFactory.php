@@ -25,7 +25,7 @@ class ChickenFactory extends Factory
             'breed_id' => $this->faker->numberBetween(1, 10),
             'height' => $this->faker->randomFloat(2, 25, 60),
             'weight' => $this->faker->randomElement(['light', 'medium', 'heavy']),
-            'den_id' => $this->faker->numberBetween(1, 1),
+            'den_id' => $this->faker->numberBetween(1, 3),
 
             'image' => fake()->randomElement(Storage::disk('public')->files('chickens_imgs')),
         ];
