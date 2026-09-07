@@ -8,16 +8,14 @@ use Illuminate\View\Component;
 
 class SiteLayout extends Component
 {
+    public $menu;
+
     /**
      * Create a new component instance.
      */
-      public function __construct()
+    public function __construct()
     {
-        $this->menu = [
-            ['label' => 'home', 'link' => '/'],
-            ['label' => 'dens', 'link' => '/dens'],
-            ['label' => 'chickens', 'link' => '/chickens'],
-        ];
+        $this->menu = [['label' => '🪹 Dens', 'link' => '/dens'], ['label' => '🐓 Chickens', 'link' => '/chickens']];
     }
 
     /**
@@ -25,6 +23,6 @@ class SiteLayout extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.app.view.components.site-layout');
+        return view('layouts.site-layout');
     }
 }

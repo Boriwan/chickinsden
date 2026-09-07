@@ -14,7 +14,7 @@
     <x-site-layout>
         <div>
             <h1> {{ $chicken->name }} 🐓</h1>
-            <img src="{{ $chicken->image }}" alt="{{ $chicken->name }}" width="200px">
+            <img src="{{ asset('storage/' . $chicken->image) }}" alt="{{ $chicken->name }}" style="max-width: 300px;">
             <div>
 
 

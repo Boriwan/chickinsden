@@ -3,7 +3,7 @@
     <div>
         @foreach ($dens as $den)
             <div>
-                <h2><a href="{{ route('dens.show', $den->id) }}">{{ $den->name }}</a></h2>
+                <h2><a class="underline" href="{{ route('dens.show', $den->id) }}">{{ $den->name }}</a></h2>
                 <p>Created Date: {{ $den->created_date }}</p>
                 <p>User ID: {{ $den->user_id }}</p>
             </div>

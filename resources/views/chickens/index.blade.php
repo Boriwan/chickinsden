@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
+    <link href="/src/style.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -20,12 +22,16 @@
                     <h2>{{ $chicken->name }}</h2>
 
                     <ul>
-                        <li>Gender: {{ $chicken->gender }}</li>
+                        @if ($chicken->gender == 'male')
+                            <li>Gender: ♂</li>
+                        @else
+                            <li>Gender: ♀</li>
+                        @endif
                         <li>Den: {{ $chicken->den_id }}</li>
                     </ul>
 
                     <img src="{{ $chicken->image }}" alt="{{ $chicken->name }}" width="200px">
-                    <a style="text-decoration: underline; color:blue" href="/chickens/{{ $chicken->id }}">View
+                    <a style="text-decoration: underline;" href="/chickens/{{ $chicken->id }}">View
                         Details</a>
                     <hr>
                 @endforeach
