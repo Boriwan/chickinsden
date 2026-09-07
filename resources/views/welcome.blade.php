@@ -13,11 +13,11 @@
 <body>
     <x-site-layout>
 
-        <h1 class="text-4xl font-bold text-center mb-6 lg:mb-12">Welcome to Chickins Den🐓☕️</h1>
+        <h1 class="text-4xl font-bold text-center mb-6 lg:mb-12" style="margin-top:8rem">Welcome to Chickins Den🐓☕️</h1>
         @if (Route::has('login'))
             <div class="h-14.5 hidden lg:block"></div>
         @endif
-        <div class="text-center">
+        <div class="text-center" style="max-width: 800px; margin: 0 auto; padding: 20px;">
 
             <p class="text-lg text-center mb-6 lg:mb-12">This is a simple web application for managing your
                 chickens and their dens. You can create, view, and manage your chickens and dens with ease.</p>
@@ -48,7 +48,7 @@
             </p>
 
             <button
-                style="background-color: #f0f0f0; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                style=" margin-top: 5rem;background-color: #f99d34; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
                 <a href="/chickens">Show my chickens</a>
             </button>
         </div>
