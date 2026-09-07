@@ -14,12 +14,16 @@
             font-family: Monospace;
         }
 
+        header div a {
+            text-decoration: none;
+            color: #000;
+            font-weight: bold;
+            padding: 5px 10px;
+        }
+
         header div a:hover {
             background-color: #f99d34;
-            padding: 10px 20px;
             border-radius: 5px;
-            /*color: #fff;*/
-            font-weight: bold;
             transition: all 0.2s ease;
         }
     </style>
@@ -30,15 +34,15 @@
         style="background-color: #f0ce8f;    height: 80px;
     display: flex;
     align-items: center;
-    padding: 0 30px;
+    padding: 0 20px;
     gap: 50px;">
         <a href="/">
             <img src="{{ asset('imgs/ChickinsLogo.png') }}" alt="Chicken App"
                 style="width: 90px; height: 90px; object-fit: contain;"> </a>
 
-        <div style="display: flex; gap: 5rem;">
+        <div style="display: flex; gap: 8rem;">
             @foreach ($menu as $item)
-                <a href="{{ $item['link'] }}" style="padding-right: 8px;"> {{ $item['label'] }} </a>
+                <a href="{{ $item['link'] }}"> {{ $item['label'] }} </a>
             @endforeach
         </div>
     </header>
