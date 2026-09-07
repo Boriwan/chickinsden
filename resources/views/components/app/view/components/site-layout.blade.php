@@ -7,7 +7,7 @@
         <meta name="description" content="">
         <meta name="keywords" content="">
     </head>
-    <body>
+    <body  style="background-color: #fff9b9;">
     <div style="background-color: #f0ce8f; padding: 15px;">
         |
         <a href="\"> Chickins Den🐓🪹☕️</a>
