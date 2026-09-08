@@ -14,27 +14,37 @@
 
     <x-site-layout>
         <div>
-            <h1>Test den's chickens🐓🪹</h1>
+            <h1 style="font-size: 2rem; font-weight: bold; margin: 20px;">My chickens🐓🪹</h1>
+            <hr>
 
+            <div style="display: flex; flex-wrap: wrap; gap: 20px; margin: 20px;">
 
-            <div>
                 @foreach ($chickens as $chicken)
-                    <h2>{{ $chicken->name }}</h2>
+                    <div
+                        style="width: 220px; padding: 20px; border: 1px solid #d6b98c; border-radius: 10px; background-color: {{ $chicken->gender == 'male' ? '#e8f0ff' : '#fff0f5' }};        ">
 
-                    <ul>
-                        @if ($chicken->gender == 'male')
-                            <li>Gender: ♂</li>
-                        @else
-                            <li>Gender: ♀</li>
-                        @endif
-                        <li>Den: {{ $chicken->den_id }}</li>
-                    </ul>
+                        <h2>{{ $chicken->name }}</h2>
 
-                    <img src="{{ $chicken->image }}" alt="{{ $chicken->name }}" width="200px">
-                    <a style="text-decoration: underline;" href="/chickens/{{ $chicken->id }}">View
-                        Details</a>
-                    <hr>
+                        <img src="{{ $chicken->image }}" alt="{{ $chicken->name }}"
+                            style=" width: 200px; height: 200px; object-fit: cover; display: block; margin: 10px auto;">
+
+                        <ul>
+                            @if ($chicken->gender == 'male')
+                                <li>Gender: ♂</li>
+                            @else
+                                <li>Gender: ♀</li>
+                            @endif
+
+                            <li>Den: {{ $chicken->den_id }}</li>
+                        </ul>
+
+                        <a href="/chickens/{{ $chicken->id }}" style="text-decoration: underline;">
+                            View Details
+                        </a>
+
+                    </div>
                 @endforeach
+
             </div>
         </div>
     </x-site-layout>

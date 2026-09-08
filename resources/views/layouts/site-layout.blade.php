@@ -31,7 +31,7 @@
 
 <body style="background-color: #fff9b9;" class="min-h-screen flex flex-col">
     <header
-        style="background-color: #f0ce8f;    height: 80px;
+        style="background-color: #c58000;    height: 80px;
     display: flex;
     align-items: center;
     padding: 0 20px;

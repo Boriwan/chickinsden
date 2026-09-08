@@ -13,7 +13,8 @@
 <body>
     <x-site-layout>
 
-        <h1 class="text-4xl font-bold text-center mb-6 lg:mb-12" style="margin-top:8rem">Welcome to Chickins Den🐓☕️</h1>
+        <h1 class="text-4xl font-bold text-center mb-6 lg:mb-12"
+            style="margin-top:8rem; font-size:2rem; font-weight: bold;">Welcome to Chickins Den🐓☕️</h1>
         @if (Route::has('login'))
             <div class="h-14.5 hidden lg:block"></div>
         @endif

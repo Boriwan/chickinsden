@@ -6,6 +6,7 @@ use App\Http\Controllers\ChickenController;
 use App\Http\Controllers\DenController;
 
 Route::get('/', [WelcomeController::class, 'index'])->name('home');
+Route::get('/about', [WelcomeController::class, 'about'])->name('about');
 
 Route::get('/chickens', [ChickenController::class, 'index'])->name('chickens');
 Route::get('/chickens/{chicken}', [ChickenController::class, 'show'])->name('chickens.show');

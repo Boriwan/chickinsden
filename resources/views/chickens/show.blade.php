@@ -13,7 +13,7 @@
 <body>
     <x-site-layout>
         <div>
-            <h1> {{ $chicken->name }} 🐓</h1>
+            <h1 style="font-size: 2rem; font-weight: bold;"> {{ $chicken->name }} 🐓</h1>
             <img src="{{ asset('storage/' . $chicken->image) }}" alt="{{ $chicken->name }}" style="max-width: 300px;">
             <div>
 
