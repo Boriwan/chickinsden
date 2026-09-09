@@ -86,8 +86,9 @@ class AdminChickenController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Chicken $chicken)
     {
-        //
+        $chicken->delete();
+        return redirect()->route('admin.chickens.index');
     }
 }

@@ -23,9 +23,9 @@ Route::get('/admin/chickens/create', [AdminChickenController::class, 'create'])-
 Route::post('/admin/chickens', [AdminChickenController::class, 'store'])->name('admin.chickens.store');
 Route::get('/admin/chickens/{chicken}', [AdminChickenController::class, 'edit'])->name('admin.chickens.edit');
 Route::put('/admin/chickens/{chicken}', [AdminChickenController::class, 'update'])->name('admin.chickens.update');
-//Route::delete('/admin/chickens/{chicken}', [AdminChickenController::class, 'destroy'])->name('admin.chickens.destroy');
+Route::delete('/admin/chickens/{chicken}', [AdminChickenController::class, 'destroy'])->name('admin.chickens.destroy');
 
-
+    
 Route::get('/dashboard', function () {
     return view('userzone.dashboard');
 })

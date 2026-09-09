@@ -38,10 +38,23 @@
                 </ul>
             </div>
         </div>
-        <button
-            onclick="window.location.href='{{ route('admin.chickens.edit', $chicken->id) }}'"
+        <button onclick="window.location.href='{{ route('admin.chickens.edit', $chicken->id) }}'"
             style="background-color: #f99d34; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
             Edit✎</button>
+
+        <button onclick="window.location.href='{{ route('admin.chickens.edit', $chicken->id) }}'"
+            style="background-color: #f99d34; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+            Edit✎</button>
+
+        <form action="{{ route('admin.chickens.destroy', $chicken->id) }}" method="POST" style="display: inline;">
+            @method('DELETE')
+            @csrf
+
+            <button type="submit"
+                style="color: #ffffff; background-color: #f90000; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                Delete🗑️
+            </button>
+        </form>
     </x-site-layout>
 </body>
 
