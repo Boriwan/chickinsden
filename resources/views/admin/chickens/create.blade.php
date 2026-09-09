@@ -10,10 +10,13 @@
         </div>
 
 
-        <select name="gender" id="gender">
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-        </select>
+        <div>
+            <label for="gender">Gender:</label>
+            <select name="gender" id="gender">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+        </div>
         <div>
             <label for="born_date">Date of Birth:</label>
             <input type="date" name="born_date" id="born_date" required>
@@ -34,13 +37,18 @@
             <input type="number" name="height" id="height" required>
         </div>
 
-        <select name="weight" id="weight">
-            <option value="light">light</option>
-            <option value="medium">medium</option>
-            <option value="heavy">heavy</option>
-        </select>
+        <div>
+            <label for="weight">Weight:</label>
+            <select name="weight" id="weight">
+                <option value="light">light</option>
+                <option value="medium">medium</option>
+                <option value="heavy">heavy</option>
+            </select>
+        </div>
 
 
-        <button type="submit">Create Chicken</button>
+        <button type="submit"
+            style="background-color: #f99d34; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Create
+            Chicken</button>
     </form>
 </x-site-layout>
