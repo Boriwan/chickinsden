@@ -28,7 +28,7 @@
 
     <x-site-layout>
         <div>
-            <h1 style="font-size: 2rem; font-weight: bold; margin: 20px;">My chickens🐓🪹</h1>
+            <h1 style="font-size: 2rem; font-weight: bold; margin: 20px;">My chickens🐓</h1>
             <hr>
 
             <div style="display: flex; flex-wrap: wrap; gap: 20px; margin: 20px;">
@@ -37,18 +37,19 @@
                     <a href="/chickens/{{ $chicken->id }}">
                         <div class="card"
                             style="background-color: {{ $chicken->gender == 'male' ? '#e8f0ff' : '#fff0f5' }};">
-                            <h2>{{ $chicken->name }}</h2>
+                            <h2>{{ $chicken->name }}
+                                @if ($chicken->gender == 'male')
+                                    ♂
+                                @else
+                                    ♀
+                                @endif
+                            </h2>
 
                             <img src="{{ $chicken->image }}" alt="{{ $chicken->name }}"
                                 style=" width: 200px; height: 200px; object-fit: cover; display: block; margin: 10px auto;">
 
                             <ul>
-                                @if ($chicken->gender == 'male')
-                                    <li>Gender: ♂</li>
-                                @else
-                                    <li>Gender: ♀</li>
-                                @endif
-
+                                <li>Age: {{ \Carbon\Carbon::parse($chicken->born_date)->age }}</li>
                                 <li>Den: {{ $chicken->den_id }}</li>
                             </ul>
                         </div>

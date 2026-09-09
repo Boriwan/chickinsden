@@ -22,7 +22,7 @@
         }
 
         header div a:hover {
-            background-color: #f99d34;
+            background-color: #fdbd45;
             border-radius: 5px;
             transition: all 0.2s ease;
         }
@@ -31,7 +31,7 @@
 
 <body style="background-color: #fff9b9;" class="min-h-screen flex flex-col">
     <header
-        style="background-color: #c58000;    height: 80px;
+        style="background-color: #f28647;    height: 80px;
     display: flex;
     align-items: center;
     padding: 0 20px;
@@ -52,7 +52,7 @@
     </main>
 
 
-    <footer style="background-color: #f0ce8f ; padding: 15px; text-align: center;">
+    <footer style="background-color: #f28647 ; padding: 15px; text-align: center;">
         Chickins Den🐓🪹☕️ - &copy; {{ date('Y') }} All rights reserved.
     </footer>
 </body>

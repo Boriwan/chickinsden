@@ -1,6 +1,6 @@
 <x-site-layout>
 
-    <h1 style="font-size: 2rem; font-weight: bold; margin: 20px;">My chickens🐓🪹</h1>
+    <h1 style="font-size: 2rem; font-weight: bold; margin: 20px;">My dens🪹</h1>
 
     <hr>
 
