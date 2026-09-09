@@ -7,6 +7,20 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
     <link href="/src/style.css" rel="stylesheet">
+    <style>
+        .card {
+            width: 220px;
+            padding: 20px;
+            border: 1px solid #d6b98c;
+            border-radius: 10px;
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            cursor: pointer;
+        }
+    </style>
 
 </head>
 
@@ -20,29 +34,25 @@
             <div style="display: flex; flex-wrap: wrap; gap: 20px; margin: 20px;">
 
                 @foreach ($chickens as $chicken)
-                    <div
-                        style="width: 220px; padding: 20px; border: 1px solid #d6b98c; border-radius: 10px; background-color: {{ $chicken->gender == 'male' ? '#e8f0ff' : '#fff0f5' }};        ">
+                    <a href="/chickens/{{ $chicken->id }}">
+                        <div class="card"
+                            style="background-color: {{ $chicken->gender == 'male' ? '#e8f0ff' : '#fff0f5' }};">
+                            <h2>{{ $chicken->name }}</h2>
 
-                        <h2>{{ $chicken->name }}</h2>
+                            <img src="{{ $chicken->image }}" alt="{{ $chicken->name }}"
+                                style=" width: 200px; height: 200px; object-fit: cover; display: block; margin: 10px auto;">
 
-                        <img src="{{ $chicken->image }}" alt="{{ $chicken->name }}"
-                            style=" width: 200px; height: 200px; object-fit: cover; display: block; margin: 10px auto;">
+                            <ul>
+                                @if ($chicken->gender == 'male')
+                                    <li>Gender: ♂</li>
+                                @else
+                                    <li>Gender: ♀</li>
+                                @endif
 
-                        <ul>
-                            @if ($chicken->gender == 'male')
-                                <li>Gender: ♂</li>
-                            @else
-                                <li>Gender: ♀</li>
-                            @endif
-
-                            <li>Den: {{ $chicken->den_id }}</li>
-                        </ul>
-
-                        <a href="/chickens/{{ $chicken->id }}" style="text-decoration: underline;">
-                            View Details
-                        </a>
-
-                    </div>
+                                <li>Den: {{ $chicken->den_id }}</li>
+                            </ul>
+                        </div>
+                    </a>
                 @endforeach
 
             </div>

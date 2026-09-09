@@ -12,7 +12,10 @@
 
 <body>
     <x-site-layout>
-        <div>
+        <div style="margin: 20px;">
+            <button onclick="window.history.back()"
+                style="background-color: #f99d34; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">&larr;
+                Back</button>
             <h1 style="font-size: 2rem; font-weight: bold;"> {{ $chicken->name }} 🐓</h1>
             <img src="{{ asset('storage/' . $chicken->image) }}" alt="{{ $chicken->name }}" style="max-width: 300px;">
             <div>
