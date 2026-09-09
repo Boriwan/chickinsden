@@ -46,7 +46,7 @@ class AdminChickenController extends Controller
             'weight' => $request->input('weight'),
         ]);
 
-        return redirect()->route('admin.chickens');
+        return redirect()->route('admin.chickens.index');
     }
 
     /**
@@ -68,10 +68,8 @@ class AdminChickenController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Chicken $chicken)
     {
-        $chicken = Chicken::findOrFail($id);
-
         $chicken->update([
             'name' => $request->input('name'),
             'gender' => $request->input('gender'),
@@ -82,7 +80,7 @@ class AdminChickenController extends Controller
             'weight' => $request->input('weight'),
         ]);
 
-        return redirect()->route('admin.chickens');
+        return redirect()->route('admin.chickens.index');
     }
 
     /**
