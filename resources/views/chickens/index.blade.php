@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-    <link href="/src/style.css" rel="stylesheet">
     <style>
+        img {
+            border-radius: 10px;
+        }
         .card {
             width: 220px;
             padding: 20px;

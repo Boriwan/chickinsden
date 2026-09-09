@@ -48,10 +48,12 @@
                 laborum.
             </p>
 
-            <button
-                style=" margin-top: 5rem;background-color: #f99d34; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
-                <a href="/chickens">Show my chickens</a>
-            </button>
+            <a href="/chickens">
+                <button
+                    style=" margin-top: 5rem;background-color: #f99d34; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                    Show my chickens
+                </button>
+            </a>
         </div>
     </x-site-layout>
 </body>
