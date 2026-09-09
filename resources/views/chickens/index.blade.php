@@ -50,7 +50,9 @@
 
                             <ul>
                                 <li>Age: {{ \Carbon\Carbon::parse($chicken->born_date)->age }}</li>
+                    <a href="/dens/{{ $chicken->den_id }}" style="text-decoration: underline; color: #f99d34;">
                                 <li>Den: {{ $chicken->den_id }}</li>
+                    </a>
                             </ul>
                         </div>
                     </a>

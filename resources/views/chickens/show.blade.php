@@ -31,7 +31,9 @@
                     <li>Breed: {{ $chicken->breed_id }}</li>
                     <li>Height: {{ $chicken->height }} cm</li>
                     <li>Weight: {{ $chicken->weight }}</li>
-                    <li>Den: {{ $chicken->den_id }}</li>
+                    <a href="/dens/{{ $chicken->den_id }}" style="text-decoration: underline; color: #f99d34;">
+                        <li>Den: {{ $chicken->den_id }}</li>
+                    </a>
                 </ul>
             </div>
         </div>
