@@ -10,11 +10,10 @@
         </div>
 
 
-        <div>
-            <label for="gender">Gender:</label>
-            <input type="text" name="gender" id="gender<" required>
-        </div>
-
+        <select name="gender" id="gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select>
         <div>
             <label for="born_date">Date of Birth:</label>
             <input type="date" name="born_date" id="born_date" required>

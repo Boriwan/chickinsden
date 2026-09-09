@@ -23,7 +23,8 @@
                     ♀
                 @endif
             </h1>
-            <img src="{{ asset('storage/' . $chicken->image) }}" alt="{{ $chicken->name }}" style="max-width: 300px; border-radius: 10px; margin-top: 20px;">
+            <img src="{{ asset('storage/' . $chicken->image) }}" alt="{{ $chicken->name }}"
+                style="max-width: 300px; border-radius: 10px; margin-top: 20px;">
             <div style="margin-top: 20px;">
                 <ul style="list-style-type: none; padding: 0; font-size: 1.2rem;">
                     <li>Age: {{ \Carbon\Carbon::parse($chicken->born_date)->age }}</li>
@@ -37,6 +38,10 @@
                 </ul>
             </div>
         </div>
+        <button
+            onclick="window.location.href='{{ route('admin.chickens.edit', $chicken->id) }}'"
+            style="background-color: #f99d34; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+            Edit✎</button>
     </x-site-layout>
 </body>
 

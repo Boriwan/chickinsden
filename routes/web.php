@@ -21,6 +21,9 @@ Route::get('/dens/{den}', [DenController::class, 'show'])->name('dens.show');
 Route::get('/admin/chickens', [AdminChickenController::class, 'index'])->name('admin.chickens');
 Route::get('/admin/chickens/create', [AdminChickenController::class, 'create'])->name('admin.chickens.create');
 Route::post('/admin/chickens', [AdminChickenController::class, 'store'])->name('admin.chickens.store');
+Route::get('/admin/chickens/{chicken}', [AdminChickenController::class, 'edit'])->name('admin.chickens.edit');
+Route::put('/admin/chickens/{chicken}', [AdminChickenController::class, 'update'])->name('admin.chickens.update');
+//Route::delete('/admin/chickens/{chicken}', [AdminChickenController::class, 'destroy'])->name('admin.chickens.destroy');
 
 
 Route::get('/dashboard', function () {

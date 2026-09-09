@@ -60,9 +60,9 @@ class AdminChickenController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Chicken $chicken)
     {
-        //
+        return view('admin.chickens.edit', compact('chicken'));
     }
 
     /**
@@ -70,7 +70,19 @@ class AdminChickenController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $chicken = Chicken::findOrFail($id);
+
+        $chicken->update([
+            'name' => $request->input('name'),
+            'gender' => $request->input('gender'),
+            'born_date' => $request->input('born_date'),
+            'breed_id' => $request->input('breed_id'),
+            'den_id' => $request->input('den_id'),
+            'height' => $request->input('height'),
+            'weight' => $request->input('weight'),
+        ]);
+
+        return redirect()->route('admin.chickens');
     }
 
     /**
