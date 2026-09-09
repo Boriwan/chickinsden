@@ -22,7 +22,6 @@ class ChickenController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**

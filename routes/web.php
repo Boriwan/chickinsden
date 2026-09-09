@@ -5,6 +5,9 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\ChickenController;
 use App\Http\Controllers\DenController;
 
+use App\Http\Controllers\Admin\AdminChickenController;
+
+// Public routes
 Route::get('/', [WelcomeController::class, 'index'])->name('home');
 Route::get('/about', [WelcomeController::class, 'about'])->name('about');
 
@@ -13,6 +16,12 @@ Route::get('/chickens/{chicken}', [ChickenController::class, 'show'])->name('chi
 
 Route::get('/dens', [DenController::class, 'index'])->name('dens');
 Route::get('/dens/{den}', [DenController::class, 'show'])->name('dens.show');
+
+// Management routes
+Route::get('/admin/chickens', [AdminChickenController::class, 'index'])->name('admin.chickens');
+Route::get('/admin/chickens/create', [AdminChickenController::class, 'create'])->name('admin.chickens.create');
+Route::post('/admin/chickens', [AdminChickenController::class, 'store'])->name('admin.chickens.store');
+
 
 Route::get('/dashboard', function () {
     return view('userzone.dashboard');
