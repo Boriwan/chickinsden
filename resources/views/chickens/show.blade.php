@@ -16,6 +16,20 @@
             <button onclick="window.history.back()"
                 style="background-color: #f99d34; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">&larr;
                 Back</button>
+
+            <button onclick="window.location.href='{{ route('admin.chickens.edit', $chicken->id) }}'"
+                style="background-color: #f99d34; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                Edit✎</button>
+
+            <form action="{{ route('admin.chickens.destroy', $chicken->id) }}" method="POST" style="display: inline;">
+                @method('DELETE')
+                @csrf
+
+                <button type="submit"
+                    style="color: #ffffff; background-color: #f90000; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                    Delete🗑️
+                </button>
+            </form>
             <h1 style="font-size: 2rem; font-weight: bold;"> {{ $chicken->name }} 🐓
                 @if ($chicken->gender == 'male')
                     ♂
@@ -38,19 +52,6 @@
                 </ul>
             </div>
 
-            <button onclick="window.location.href='{{ route('admin.chickens.edit', $chicken->id) }}'"
-                style="background-color: #f99d34; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
-                Edit✎</button>
-
-            <form action="{{ route('admin.chickens.destroy', $chicken->id) }}" method="POST" style="display: inline;">
-                @method('DELETE')
-                @csrf
-
-                <button type="submit"
-                    style="color: #ffffff; background-color: #f90000; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
-                    Delete🗑️
-                </button>
-            </form>
         </div>
     </x-site-layout>
 </body>
