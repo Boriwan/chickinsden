@@ -21,7 +21,7 @@ class ChickenFactory extends Factory
         return [
             'name' => $this->faker->firstName(),
             'gender' => $this->faker->randomElement(['male', 'female']),
-            'born_date' => $this->faker->date(),
+            'birth_date' => $this->faker->date(),
             'breed_id' => $this->faker->numberBetween(1, 10),
             'height' => $this->faker->randomFloat(2, 25, 60),
             'weight' => $this->faker->randomElement(['light', 'medium', 'heavy']),

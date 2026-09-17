@@ -19,7 +19,7 @@
 
         <div>
             <label for="born_date">Date of Birth:</label>
-            <input type="date" name="born_date" id="born_date" value="{{ $chicken->born_date }}" required>
+            <input type="date" name="born_date" id="birth_date" value="{{ $chicken->birth_date }}" required>
         </div>
 
         <div>

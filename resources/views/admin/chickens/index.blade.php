@@ -18,7 +18,7 @@ Admin view chickens
                 <tr style="border: 2px solid #000000;">
                     <td>{{ $chicken->id }}</td>
                     <td>{{ $chicken->name }}</td>
-                    <td>{{ $chicken->born_date}}</td>
+                    <td>{{ $chicken->birth_date}}</td>
                     <td>{{ $chicken->breed_id }}</td>
                     <td>
                         <!-- Add action buttons here (e.g., Edit, Delete) -->

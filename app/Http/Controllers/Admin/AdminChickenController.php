@@ -39,7 +39,7 @@ class AdminChickenController extends Controller
         Chicken::create([
             'name' => $request->input('name'),
             'gender' => $request->input('gender'),
-            'born_date' => $request->input('born_date'),
+            'birth_date' => $request->input('birth_date'),
             'breed_id' => $request->input('breed_id'),
             'den_id' => $request->input('den_id'),
             'height' => $request->input('height'),
@@ -73,7 +73,7 @@ class AdminChickenController extends Controller
         $chicken->update([
             'name' => $request->input('name'),
             'gender' => $request->input('gender'),
-            'born_date' => $request->input('born_date'),
+            'birth_date' => $request->input('birth_date'),
             'breed_id' => $request->input('breed_id'),
             'den_id' => $request->input('den_id'),
             'height' => $request->input('height'),

@@ -51,7 +51,7 @@
                                 style=" width: 200px; height: 200px; object-fit: cover; display: block; margin: 10px auto;">
 
                             <ul>
-                                <li>Age: {{ \Carbon\Carbon::parse($chicken->born_date)->age }}</li>
+                                <li>Age: {{ \Carbon\Carbon::parse($chicken->birth_date)->age }}</li>
                                 <li>Den: {{ $chicken->den_id }}</li>
                             </ul>
                         </div>

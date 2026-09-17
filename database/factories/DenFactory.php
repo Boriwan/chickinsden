@@ -19,7 +19,7 @@ class DenFactory extends Factory
     {
         return [
             'name' => $this->faker->randomElement(['My Cozy Nest', 'Lovely den', 'Chicken Paradise', 'Feathered Haven']),
-            'created_date' => $this->faker->date(),
+            'creation_date' => $this->faker->date(),
             'user_id' => $this->faker->uuid(),
         ];
     }

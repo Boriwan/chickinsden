@@ -37,7 +37,7 @@
 
                 <div style="margin-bottom: 12px;">
                     <label>Date of Birth:</label>
-                    <input type="date" name="born_date" required style="width: 100%; padding: 8px;">
+                    <input type="date" name="birth_date" required style="width: 100%; padding: 8px;">
                 </div>
 
                 <div style="margin-bottom: 12px;">

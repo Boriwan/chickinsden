@@ -16,7 +16,7 @@ return new class extends Migration
 
             $table->string('name');
             $table->string('gender');
-            $table->integer('born_date');
+            $table->integer('birth_date');
             $table->string('breed_id');
 
             $table->string('height')->nullable();

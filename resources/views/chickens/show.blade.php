@@ -41,8 +41,8 @@
                 style="max-width: 300px; border-radius: 10px; margin-top: 20px;">
             <div style="margin-top: 20px;">
                 <ul style="list-style-type: none; padding: 0; font-size: 1.2rem;">
-                    <li>Age: {{ \Carbon\Carbon::parse($chicken->born_date)->age }}</li>
-                    <li>Born: {{ $chicken->born_date }}</li>
+                    <li>Age: {{ \Carbon\Carbon::parse($chicken->birth_date)->age }}</li>
+                    <li>Born: {{ $chicken->birth_date }}</li>
                     <li>Breed: {{ $chicken->breed_id }}</li>
                     <li>Height: {{ $chicken->height }} cm</li>
                     <li>Weight: {{ $chicken->weight }}</li>

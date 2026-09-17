@@ -10,5 +10,5 @@ class Chicken extends Model
     /** @use HasFactory<\Database\Factories\ChickenFactory> */
     use HasFactory;
 
-    protected $fillable = ['name', 'gender', 'born_date', 'breed_id', 'den_id', 'height', 'weight'];
+    protected $fillable = ['name', 'gender', 'birth_date', 'breed_id', 'den_id', 'height', 'weight'];
 }
