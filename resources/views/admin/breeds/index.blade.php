@@ -1,0 +1,3 @@
+<div>
+    Breeds page
+</div>
