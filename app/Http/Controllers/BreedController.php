@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Breed;
 
-
-class AdminBreedController extends Controller
+class BreedController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +14,7 @@ class AdminBreedController extends Controller
     {
         $breeds = Breed::all();
 
-        return view('admin.breeds.index', compact('breeds'));
+        return view('breeds.index', compact('breeds'));
     }
 
     /**
@@ -38,9 +36,9 @@ class AdminBreedController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Breed $breed)
     {
-        //
+        return view('breeds.show', compact('breed'));
     }
 
     /**

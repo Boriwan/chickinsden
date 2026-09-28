@@ -16,6 +16,26 @@
             <h1>
                 Breeds administraion
             </h1>
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead style="background-color: #f99d34; color: white; text-align: left; border: 2px solid #000000;">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody style="background-color: #f2f2f2; border: 2px solid #000000;">
+                    @foreach ($breeds as $breed)
+                        <tr style="border: 2px solid #000000;">
+                            <td>{{ $breed->id }}</td>
+                            <td>{{ $breed->name }}</td>
+                            <td>{{ $breed->description }}</td>
+                            <td>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </x-site-layout>
 </body>

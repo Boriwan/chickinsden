@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\ChickenController;
+use App\Http\Controllers\BreedController;
 use App\Http\Controllers\DenController;
 
 use App\Http\Controllers\Admin\AdminController;
@@ -15,6 +16,11 @@ Route::get('/about', [WelcomeController::class, 'about'])->name('about');
 
 Route::get('/chickens', [ChickenController::class, 'index'])->name('chickens.index');
 Route::get('/chickens/{chicken}', [ChickenController::class, 'show'])->name('chickens.show');
+
+Route::get('/breeds', [BreedController::class, 'index'])->name('breeds.index');
+Route::get('/breeds/{breed}', [BreedController::class, 'show'])->name('breeds.show');
+
+
 
 Route::get('/dens', [DenController::class, 'index'])->name('dens.index');
 Route::get('/dens/{den}', [DenController::class, 'show'])->name('dens.show');
