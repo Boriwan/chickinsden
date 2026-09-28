@@ -5,17 +5,17 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class AdminBreedController extends Controller
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('admin.breeds.index');
+        return view('admin.index');
     }
 
-    /**
+    /**x
      * Show the form for creating a new resource.
      */
     public function create()

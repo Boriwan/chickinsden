@@ -5,8 +5,9 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\ChickenController;
 use App\Http\Controllers\DenController;
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminChickenController;
-use App\Htpp\Controller\Admin\AdminBreedController;
+use App\Http\Controllers\Admin\AdminBreedController;
 
 // Public routes
 Route::get('/', [WelcomeController::class, 'index'])->name('home');
@@ -19,6 +20,7 @@ Route::get('/dens', [DenController::class, 'index'])->name('dens.index');
 Route::get('/dens/{den}', [DenController::class, 'show'])->name('dens.show');
 
 // Management routes
+Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 //Chickens
 Route::get('/admin/chickens', [AdminChickenController::class, 'index'])->name('admin.chickens.index');
 Route::get('/admin/chickens/create', [AdminChickenController::class, 'create'])->name('admin.chickens.create');
