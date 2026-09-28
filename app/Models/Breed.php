@@ -9,4 +9,6 @@ class Breed extends Model
 {
     /** @use HasFactory<\Database\Factories\BreedFactory> */
     use HasFactory;
+    protected $fillable = ['name', 'description'];
+
 }
