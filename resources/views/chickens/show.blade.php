@@ -43,7 +43,9 @@
                 <ul style="list-style-type: none; padding: 0; font-size: 1.2rem;">
                     <li>Age: {{ \Carbon\Carbon::parse($chicken->birth_date)->age }}</li>
                     <li>Born: {{ $chicken->birth_date }}</li>
-                    <li>Breed: {{ $chicken->breed_id }}</li>
+                    <a href="/breeds/{{ $chicken->breed_id }}" style="text-decoration: underline; color: #f99d34;">
+                        <li>Breed: {{ $chicken->breed_id }}</li>
+                    </a>
                     <li>Height: {{ $chicken->height }} cm</li>
                     <li>Weight: {{ $chicken->weight }}</li>
                     <a href="/dens/{{ $chicken->den_id }}" style="text-decoration: underline; color: #f99d34;">
