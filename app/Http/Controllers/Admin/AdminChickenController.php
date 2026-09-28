@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Chicken;
-
+use App\Models\Breed;
 class AdminChickenController extends Controller
 {
     /**
@@ -22,7 +22,10 @@ class AdminChickenController extends Controller
      */
     public function create()
     {
-        return view('admin.chickens.create');
+        $breeds = Breed::all();
+        
+
+        return view('admin.chickens.create', compact('breeds'));
     }
 
     /**

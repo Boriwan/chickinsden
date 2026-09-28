@@ -39,10 +39,16 @@
                     <label>Date of Birth:</label>
                     <input type="date" name="birth_date" required style="width: 100%; padding: 8px;">
                 </div>
-
                 <div style="margin-bottom: 12px;">
-                    <label>Breed ID:</label>
-                    <input type="number" name="breed_id" required style="width: 100%; padding: 8px;">
+                    <label>Breed:</label>
+
+                    <select name="breed_id" style="width: 100%; padding: 8px;">
+                        @foreach ($breeds as $breed)
+                            <option value="{{ $breed->id }}">
+                                {{ $breed->name }}
+                            </option>
+                        @endforeach
+                    </select>
                 </div>
 
                 <div style="margin-bottom: 12px;">

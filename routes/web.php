@@ -14,18 +14,18 @@ use App\Http\Controllers\Admin\AdminBreedController;
 Route::get('/', [WelcomeController::class, 'index'])->name('home');
 Route::get('/about', [WelcomeController::class, 'about'])->name('about');
 
+// Logged in routes
+
 Route::get('/chickens', [ChickenController::class, 'index'])->name('chickens.index');
 Route::get('/chickens/{chicken}', [ChickenController::class, 'show'])->name('chickens.show');
 
 Route::get('/breeds', [BreedController::class, 'index'])->name('breeds.index');
 Route::get('/breeds/{breed}', [BreedController::class, 'show'])->name('breeds.show');
 
-
-
 Route::get('/dens', [DenController::class, 'index'])->name('dens.index');
 Route::get('/dens/{den}', [DenController::class, 'show'])->name('dens.show');
 
-// Management routes
+// Admin routes
 Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 //Chickens
 Route::get('/admin/chickens', [AdminChickenController::class, 'index'])->name('admin.chickens.index');
