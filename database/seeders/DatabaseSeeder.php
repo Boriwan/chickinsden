@@ -22,7 +22,22 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Test User', 'password' => 'password'],
         );
 
-        Breed::factory(10)->create();
+        $breeds = [
+            ['name' => 'Leghorn', 'description' => 'A slender, prolific layer known for producing large white eggs.'],
+            ['name' => 'Rhode Island Red', 'description' => 'A hardy dual-purpose breed, a firm favourite on small farms.'],
+            ['name' => 'Orpington', 'description' => 'A plump, docile breed with a thick plumage and steady temperament.'],
+            ['name' => 'Plymouth Rock', 'description' => 'A classic American breed prized for calmness and dependable egg laying.'],
+            ['name' => 'Silkie', 'description' => 'A distinctive breed with silk-like plumage, crest, and five toes.'],
+            ['name' => 'Australorp', 'description' => 'A black-feathered layer from Australia and an excellent egg producer.'],
+            ['name' => 'Wyandotte', 'description' => 'A rose-combed breed with a wide, rounded body and striking patterning.'],
+            ['name' => 'Sussex', 'description' => 'An English breed known for pale, speckled eggs and a gentle nature.'],
+            ['name' => 'Barnevelder', 'description' => 'A Dutch breed laying strikingly dark brown eggs.'],
+            ['name' => 'ISA Brown', 'description' => 'A modern commercial strain famous for very high egg yield.'],
+        ];
+
+        foreach ($breeds as $breed) {
+            Breed::firstOrCreate(['name' => $breed['name']], ['description' => $breed['description']]);
+        }
 
         Chicken::factory(12)->create();
     }

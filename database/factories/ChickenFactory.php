@@ -23,7 +23,7 @@ class ChickenFactory extends Factory
             'name' => $this->faker->firstName(),
             'gender' => $this->faker->randomElement(['male', 'female']),
             'birth_date' => $this->faker->date(),
-            'breed_id' => Breed::factory(),
+            'breed_id' => fn () => Breed::inRandomOrder()->value('id') ?? Breed::factory(),
             'height' => $this->faker->randomFloat(2, 25, 60),
             'weight' => $this->faker->randomElement(['light', 'medium', 'heavy']),
 
