@@ -14,25 +14,27 @@ Route::get('/', [WelcomeController::class, 'index'])->name('home');
 Route::get('/about', [WelcomeController::class, 'about'])->name('about');
 
 // Logged in routes
+Route::middleware(['auth'])->group(function () {
+    // User routes
+    Route::get('/chickens', [ChickenController::class, 'index'])->name('chickens.index');
+    Route::get('/chickens/{chicken}', [ChickenController::class, 'show'])->name('chickens.show');
 
-Route::get('/chickens', [ChickenController::class, 'index'])->name('chickens.index');
-Route::get('/chickens/{chicken}', [ChickenController::class, 'show'])->name('chickens.show');
+    Route::get('/breeds', [BreedController::class, 'index'])->name('breeds.index');
+    Route::get('/breeds/{breed}', [BreedController::class, 'show'])->name('breeds.show');
 
-Route::get('/breeds', [BreedController::class, 'index'])->name('breeds.index');
-Route::get('/breeds/{breed}', [BreedController::class, 'show'])->name('breeds.show');
-
-// Admin routes
-Route::middleware('auth')->group(function () {
-    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
-    // Chickens
-    Route::get('/admin/chickens', [AdminChickenController::class, 'index'])->name('admin.chickens.index');
-    Route::get('/admin/chickens/create', [AdminChickenController::class, 'create'])->name('admin.chickens.create');
-    Route::post('/admin/chickens', [AdminChickenController::class, 'store'])->name('admin.chickens.store');
-    Route::get('/admin/chickens/{chicken}', [AdminChickenController::class, 'edit'])->name('admin.chickens.edit');
-    Route::put('/admin/chickens/{chicken}', [AdminChickenController::class, 'update'])->name('admin.chickens.update');
-    Route::delete('/admin/chickens/{chicken}', [AdminChickenController::class, 'destroy'])->name('admin.chickens.destroy');
-    // Breeds
-    Route::get('/admin/breeds', [AdminBreedController::class, 'index'])->name('admin.breeds.index');
+    // Admin routes
+    Route::middleware('auth')->group(function () {
+        Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+        // Chickens
+        Route::get('/admin/chickens', [AdminChickenController::class, 'index'])->name('admin.chickens.index');
+        Route::get('/admin/chickens/create', [AdminChickenController::class, 'create'])->name('admin.chickens.create');
+        Route::post('/admin/chickens', [AdminChickenController::class, 'store'])->name('admin.chickens.store');
+        Route::get('/admin/chickens/{chicken}', [AdminChickenController::class, 'edit'])->name('admin.chickens.edit');
+        Route::put('/admin/chickens/{chicken}', [AdminChickenController::class, 'update'])->name('admin.chickens.update');
+        Route::delete('/admin/chickens/{chicken}', [AdminChickenController::class, 'destroy'])->name('admin.chickens.destroy');
+        // Breeds
+        Route::get('/admin/breeds', [AdminBreedController::class, 'index'])->name('admin.breeds.index');
+    });
 });
 
 Route::get('/dashboard', function () {
@@ -47,4 +49,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

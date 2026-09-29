@@ -2,7 +2,12 @@
     <div class="mx-auto max-w-3xl px-5 py-16 text-center">
         <div class="mb-6 flex items-center justify-center gap-3">
             <x-icon name="egg" class="h-10 w-10 text-brand-500" />
-            <h1 class="text-4xl font-bold text-stone-900">Welcome to Chickins Den</h1>
+            @auth
+                <h1 class="text-4xl font-bold text-stone-900">Welcome to back {{ auth()->user()->name }}</h1>
+            @else
+                <h1 class="text-4xl font-bold text-stone-900">Welcome to Chickins Den!</h1>
+
+            @endauth
         </div>
 
         <p class="mb-4 text-lg text-stone-600">
