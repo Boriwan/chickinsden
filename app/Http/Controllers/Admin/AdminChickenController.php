@@ -14,7 +14,11 @@ class AdminChickenController extends Controller
      */
     public function index()
     {
-        $chickens = Chicken::all();
+        if (auth()->user()->is_admin) {
+            $chickens = Chicken::all();
+        } else {
+            $chickens = Chicken::where('user_id', auth()->user()->id)->get();
+        }
 
         return view('admin.chickens.index', compact('chickens'));
     }

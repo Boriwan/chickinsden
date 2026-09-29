@@ -22,10 +22,15 @@
 
         <nav class="flex flex-wrap items-center gap-1">
             @foreach ($menu as $item)
-                <a href="{{ route($item['route']) }}" @class([
+                @php
+                    $itemRoute = is_array($item) ? ($item['route'] ?? null) : null;
+                    $isCurrentRoute = is_string($itemRoute) && request()->routeIs($itemRoute);
+                @endphp
+
+                <a href="{{ $itemRoute ? route($itemRoute) : '#' }}" @class([
                     'flex items-center gap-2 rounded-lg px-3 py-2 font-semibold transition',
-                    'bg-white/60 text-stone-900' => request()->routeIs($item['route']),
-                    'text-stone-800 hover:bg-white/40' => !request()->routeIs($item['route']),
+                    'bg-white/60 text-stone-900' => $isCurrentRoute,
+                    'text-stone-800 hover:bg-white/40' => !$isCurrentRoute,
                 ])>
                     <x-icon :name="$item['icon']" class="h-5 w-5 shrink-0" />
                     <span>{{ $item['label'] }}</span>

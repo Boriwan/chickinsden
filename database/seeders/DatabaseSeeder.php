@@ -17,10 +17,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::firstOrCreate(
-            ['email' => 'test@example.com'],
-            ['name' => 'Test User', 'password' => 'password'],
-        );
+        User::factory()->create(['email' => 'boris.bocek@radnom.cz', 'name' => 'Boris Admin', 'password' => 'password', 'isAdmin' => true]);
+        User::factory()->create(['email' => 'boris.bocek2@radnom.cz', 'name' => 'Boris User', 'password' => 'password', 'isAdmin' => false]);
+
+
+        User::factory(10)->create();
 
         $breeds = [
             ['name' => 'Leghorn', 'description' => 'A slender, prolific layer known for producing large white eggs.'],
