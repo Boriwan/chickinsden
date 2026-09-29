@@ -1,21 +1,20 @@
 <x-site-layout>
-    <h1 class="mb-6 mt-32 text-center text-3xl font-bold">About Chickins Den🐓☕️</h1>
+    <div class="mx-auto max-w-3xl px-5 py-16 text-center">
+        <div class="mb-6 flex items-center justify-center gap-3">
+            <x-icon name="info" class="h-9 w-9 text-brand-500" />
+            <h1 class="text-4xl font-bold text-stone-900">About Chickins Den</h1>
+        </div>
 
-    <div class="mx-auto max-w-3xl px-5 pb-8 text-center">
-        <p class="mb-6 text-lg">
-            This is a simple web application for managing your chickens. You can create, view, and manage your
-            chickens with ease.
+        <p class="mb-4 text-lg text-stone-600">
+            A simple web application for logging and managing your chickens. You can create, view, and
+            manage your chickens with ease.
         </p>
 
-        <p class="text-left leading-relaxed">
-            Fugiat aliqua ad nostrud officia sit irure duis aute ipsum cillum. Est enim Lorem nostrud enim deserunt est
-            pariatur tempor adipisicing velit commodo. Fugiat sint nisi fugiat enim dolore veniam quis sint sunt commodo
-            non. Culpa amet ad culpa enim tempor voluptate. Cillum in est sit excepteur.
-            Ex culpa proident adipisicing adipisicing exercitation. Tempor duis non mollit aliquip consectetur laboris
-            aliquip ea incididunt amet tempor aliqua. Et minim amet ea deserunt nostrud ea duis fugiat proident enim.
-            Dolor proident sit Lorem minim ex.
+        <p class="mb-10 text-left leading-relaxed text-stone-500">
+            Every chicken gets a profile with a photo, age, breed and traits, so you always have the details
+            of your flock at a glance. Admins can manage all chickens, breeds and traits from one place.
         </p>
 
-        <img src="{{ asset('imgs/ChickinsLogo.png') }}" alt="Chickins Den" class="mx-auto mt-4 w-48">
+        <img src="{{ asset('imgs/ChickinsLogo.png') }}" alt="Chickins Den" class="mx-auto h-40 w-40 object-contain">
     </div>
 </x-site-layout>

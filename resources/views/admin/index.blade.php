@@ -1,15 +1,29 @@
 <x-site-layout>
-    <div class="m-5 w-fit rounded-lg border border-surface-border bg-[#deb887] p-4">
-        <h1 class="text-3xl font-bold">Admin page</h1>
+    <div class="mx-auto max-w-5xl px-5 py-8">
+        <h1 class="mb-6 text-3xl font-bold text-stone-900">Admin</h1>
 
-        <div class="mt-4 rounded-lg bg-[#ffe4c4] p-4 font-bold">
-            <h2 class="text-xl">
-                <a href="{{ route('admin.chickens.index') }}" class="hover:text-brand">Administrate chickens</a>
-            </h2>
+        <div class="grid gap-4 sm:grid-cols-2">
+            <a href="{{ route('admin.chickens.index') }}"
+                class="flex items-center gap-4 rounded-xl border border-surface-border bg-surface p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+                <span class="flex h-11 w-11 items-center justify-center rounded-lg bg-brand-100 text-brand-700">
+                    <x-icon name="egg" class="h-5 w-5" />
+                </span>
+                <span>
+                    <span class="block font-semibold text-stone-900">Chickens</span>
+                    <span class="text-sm text-stone-500">View and manage chickens</span>
+                </span>
+            </a>
 
-            <h2 class="text-xl">
-                <a href="{{ route('admin.breeds.index') }}" class="hover:text-brand">Administrate breeds</a>
-            </h2>
+            <a href="{{ route('admin.breeds.index') }}"
+                class="flex items-center gap-4 rounded-xl border border-surface-border bg-surface p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+                <span class="flex h-11 w-11 items-center justify-center rounded-lg bg-brand-100 text-brand-700">
+                    <x-icon name="folder" class="h-5 w-5" />
+                </span>
+                <span>
+                    <span class="block font-semibold text-stone-900">Breeds</span>
+                    <span class="text-sm text-stone-500">View and manage breeds</span>
+                </span>
+            </a>
         </div>
     </div>
 </x-site-layout>

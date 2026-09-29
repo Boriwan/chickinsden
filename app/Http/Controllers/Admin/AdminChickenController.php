@@ -66,7 +66,9 @@ class AdminChickenController extends Controller
      */
     public function edit(Chicken $chicken)
     {
-        return view('admin.chickens.edit', compact('chicken'));
+        $breeds = Breed::all();
+
+        return view('admin.chickens.edit', compact('chicken', 'breeds'));
     }
 
     /**

@@ -13,21 +13,24 @@ export default {
         extend: {
             colors: {
                 brand: {
-                    DEFAULT: '#f99d34',
-                    dark: '#e88c2a',
-                    light: '#fdbd45',
+                    50: '#fff8ed',
+                    100: '#ffedcf',
+                    200: '#ffd9a3',
+                    300: '#fdc078',
+                    400: '#f9b04a',
+                    500: '#f99d34',
+                    600: '#e88c2a',
+                    700: '#c96f14',
                 },
-                shell: {
-                    DEFAULT: '#f28647',
-                },
-                page: '#fff9b9',
+                shell: '#eea34f',
+                page: '#fdfaf3',
                 surface: {
-                    DEFAULT: '#fff9d6',
-                    border: '#d6b98c',
+                    DEFAULT: '#fffdf8',
+                    border: '#e9e0cf',
                 },
-                tint: {
-                    male: '#e8f0ff',
-                    female: '#fff0f5',
+                gender: {
+                    male: '#3b82f6',
+                    female: '#ec4899',
                 },
             },
             fontFamily: {

@@ -1,30 +1,53 @@
 <x-site-layout>
-    <div class="m-5">
-        <h1 class="mb-4 text-3xl font-bold">Admin view chickens</h1>
+    <div class="mx-auto max-w-6xl px-5 py-8">
+        <div class="mb-6 flex flex-wrap items-center justify-between gap-4">
+            <h1 class="text-3xl font-bold text-stone-900">Chickens</h1>
 
-        <div class="overflow-x-auto">
-            <table class="w-full border-collapse text-left">
-                <thead class="bg-brand text-white">
-                    <tr>
-                        <th class="border border-surface-border px-4 py-2">ID</th>
-                        <th class="border border-surface-border px-4 py-2">Name</th>
-                        <th class="border border-surface-border px-4 py-2">Date of Birth</th>
-                        <th class="border border-surface-border px-4 py-2">Breed</th>
-                        <th class="border border-surface-border px-4 py-2">Actions</th>
-                    </tr>
-                </thead>
-                <tbody class="bg-gray-100">
-                    @foreach ($chickens as $chicken)
+            <x-button href="{{ route('admin.chickens.create') }}">
+                <x-icon name="plus" class="h-4 w-4" />
+                Add chicken
+            </x-button>
+        </div>
+
+        <div class="overflow-hidden rounded-xl border border-surface-border bg-surface shadow-sm">
+            @if ($chickens->isEmpty())
+                <div class="flex flex-col items-center gap-2 px-6 py-16 text-center">
+                    <x-icon name="inbox" class="h-10 w-10 text-stone-300" />
+                    <p class="font-semibold text-stone-900">No chickens yet</p>
+                    <p class="text-sm text-stone-500">Add your first chicken to get started.</p>
+                </div>
+            @else
+                <table class="w-full text-left text-sm">
+                    <thead class="border-b border-surface-border bg-brand-50 text-xs uppercase tracking-wide text-brand-700">
                         <tr>
-                            <td class="border border-surface-border px-4 py-2">{{ $chicken->id }}</td>
-                            <td class="border border-surface-border px-4 py-2">{{ $chicken->name }}</td>
-                            <td class="border border-surface-border px-4 py-2">{{ $chicken->birth_date }}</td>
-                            <td class="border border-surface-border px-4 py-2">{{ $chicken->breed_id }}</td>
-                            <td class="border border-surface-border px-4 py-2"></td>
+                            <th class="px-4 py-3 font-semibold">ID</th>
+                            <th class="px-4 py-3 font-semibold">Name</th>
+                            <th class="px-4 py-3 font-semibold">Birth date</th>
+                            <th class="px-4 py-3 font-semibold">Breed</th>
+                            <th class="px-4 py-3 font-semibold">Actions</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody class="divide-y divide-surface-border">
+                        @foreach ($chickens as $chicken)
+                            <tr class="transition hover:bg-brand-50/50">
+                                <td class="px-4 py-3 text-stone-500">{{ $chicken->id }}</td>
+                                <td class="px-4 py-3 font-medium text-stone-900">{{ $chicken->name }}</td>
+                                <td class="px-4 py-3 text-stone-600">
+                                    {{ \Carbon\Carbon::parse($chicken->birth_date)->format('d.m.Y') }}
+                                </td>
+                                <td class="px-4 py-3 text-stone-600">{{ $chicken->breed?->name ?? '—' }}</td>
+                                <td class="px-4 py-3">
+                                    <a href="{{ route('admin.chickens.edit', $chicken) }}"
+                                        class="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 font-medium text-stone-600 transition hover:bg-stone-100 hover:text-stone-900">
+                                        <x-icon name="pencil" class="h-4 w-4" />
+                                        Edit
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            @endif
         </div>
     </div>
 </x-site-layout>

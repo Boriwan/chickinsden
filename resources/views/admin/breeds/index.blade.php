@@ -1,26 +1,33 @@
 <x-site-layout>
-    <div class="m-5">
-        <h1 class="mb-4 text-3xl font-bold">Breeds administration</h1>
+    <div class="mx-auto max-w-6xl px-5 py-8">
+        <h1 class="mb-6 text-3xl font-bold text-stone-900">Breeds</h1>
 
-        <div class="overflow-x-auto">
-            <table class="w-full border-collapse text-left">
-                <thead class="bg-brand text-white">
-                    <tr>
-                        <th class="border border-surface-border px-4 py-2">ID</th>
-                        <th class="border border-surface-border px-4 py-2">Name</th>
-                        <th class="border border-surface-border px-4 py-2">Description</th>
-                    </tr>
-                </thead>
-                <tbody class="bg-gray-100">
-                    @foreach ($breeds as $breed)
+        <div class="overflow-hidden rounded-xl border border-surface-border bg-surface shadow-sm">
+            @if ($breeds->isEmpty())
+                <div class="flex flex-col items-center gap-2 px-6 py-16 text-center">
+                    <x-icon name="folder" class="h-10 w-10 text-stone-300" />
+                    <p class="font-semibold text-stone-900">No breeds yet</p>
+                </div>
+            @else
+                <table class="w-full text-left text-sm">
+                    <thead class="border-b border-surface-border bg-brand-50 text-xs uppercase tracking-wide text-brand-700">
                         <tr>
-                            <td class="border border-surface-border px-4 py-2">{{ $breed->id }}</td>
-                            <td class="border border-surface-border px-4 py-2">{{ $breed->name }}</td>
-                            <td class="border border-surface-border px-4 py-2">{{ $breed->description }}</td>
+                            <th class="px-4 py-3 font-semibold">ID</th>
+                            <th class="px-4 py-3 font-semibold">Name</th>
+                            <th class="px-4 py-3 font-semibold">Description</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody class="divide-y divide-surface-border">
+                        @foreach ($breeds as $breed)
+                            <tr class="transition hover:bg-brand-50/50">
+                                <td class="px-4 py-3 text-stone-500">{{ $breed->id }}</td>
+                                <td class="px-4 py-3 font-medium text-stone-900">{{ $breed->name }}</td>
+                                <td class="px-4 py-3 text-stone-600">{{ $breed->description }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            @endif
         </div>
     </div>
 </x-site-layout>

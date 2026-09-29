@@ -16,11 +16,11 @@ class SiteLayout extends Component
     public function __construct()
     {
         $this->menu = [
-            ['label' => '🐓 Chickens', 'route' => 'chickens.index'],
-            ['label' => '📂 breeds', 'route' => 'breeds.index'],
-            ['label' => 'ℹ️ About', 'route' => 'about'],
-            ['label' => '⚙️ Admin', 'route' => 'admin.index'],
-            ['label' => '➕ Add Chicken', 'route' => 'admin.chickens.create'],
+            ['label' => 'Chickens', 'route' => 'chickens.index', 'icon' => 'egg'],
+            ['label' => 'Breeds', 'route' => 'breeds.index', 'icon' => 'folder'],
+            ['label' => 'About', 'route' => 'about', 'icon' => 'info'],
+            ['label' => 'Admin', 'route' => 'admin.index', 'icon' => 'settings'],
+            ['label' => 'Add Chicken', 'route' => 'admin.chickens.create', 'icon' => 'plus'],
         ];
     }
 

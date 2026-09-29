@@ -5,7 +5,7 @@ test('welcome page renders with navigation', function () {
 
     $response->assertOk();
 
-    $response->assertSee('Welcome to Chickins Den🐓☕️');
+    $response->assertSee('Welcome to Chickins Den');
     $response->assertSee(route('chickens.index'));
     $response->assertSee(route('breeds.index'));
     $response->assertSee(route('about'));
