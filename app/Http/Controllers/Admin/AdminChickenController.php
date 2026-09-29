@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\Chicken;
 use App\Models\Breed;
+use App\Models\Chicken;
+use Illuminate\Http\Request;
+
 class AdminChickenController extends Controller
 {
     /**
@@ -14,6 +15,7 @@ class AdminChickenController extends Controller
     public function index()
     {
         $chickens = Chicken::all();
+
         return view('admin.chickens.index', compact('chickens'));
     }
 
@@ -23,7 +25,6 @@ class AdminChickenController extends Controller
     public function create()
     {
         $breeds = Breed::all();
-        
 
         return view('admin.chickens.create', compact('breeds'));
     }
@@ -44,7 +45,7 @@ class AdminChickenController extends Controller
             'gender' => $request->input('gender'),
             'birth_date' => $request->input('birth_date'),
             'breed_id' => $request->input('breed_id'),
-            'den_id' => $request->input('den_id'),
+
             'height' => $request->input('height'),
             'weight' => $request->input('weight'),
         ]);
@@ -78,7 +79,7 @@ class AdminChickenController extends Controller
             'gender' => $request->input('gender'),
             'birth_date' => $request->input('birth_date'),
             'breed_id' => $request->input('breed_id'),
-            'den_id' => $request->input('den_id'),
+
             'height' => $request->input('height'),
             'weight' => $request->input('weight'),
         ]);
@@ -92,6 +93,7 @@ class AdminChickenController extends Controller
     public function destroy(Chicken $chicken)
     {
         $chicken->delete();
+
         return redirect()->route('admin.chickens.index');
     }
 }

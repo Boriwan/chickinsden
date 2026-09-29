@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Breed;
 use App\Models\Chicken;
-use App\Models\Den;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -24,7 +23,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Breed::factory(4)->create();
-        Den::factory(3)->create();
+
         Chicken::factory(12)->create();
     }
 }

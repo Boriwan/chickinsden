@@ -52,7 +52,7 @@
 
                             <ul>
                                 <li>Age: {{ \Carbon\Carbon::parse($chicken->birth_date)->age }}</li>
-                                <li>Den: {{ $chicken->den_id }}</li>
+                                
                             </ul>
                         </div>
                     </a>

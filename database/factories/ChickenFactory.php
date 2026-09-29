@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Models\Breed;
 use App\Models\Chicken;
-use App\Models\Den;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Storage;
 
@@ -27,7 +26,7 @@ class ChickenFactory extends Factory
             'breed_id' => Breed::factory(),
             'height' => $this->faker->randomFloat(2, 25, 60),
             'weight' => $this->faker->randomElement(['light', 'medium', 'heavy']),
-            'den_id' => Den::factory(),
+
             'image' => fake()->randomElement(Storage::disk('public')->files('chickens_imgs')),
         ];
     }

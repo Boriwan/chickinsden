@@ -27,10 +27,7 @@
             <input type="number" name="breed_id" id="breed_id" value="{{ $chicken->breed_id }}" required>
         </div>
 
-        <div>
-            <label for="den_id">Den ID:</label>
-            <input type="number" name="den_id" id="den_id" value="{{ $chicken->den_id }}" required>
-        </div>
+        
 
         <div>
             <label for="height">Height:</label>

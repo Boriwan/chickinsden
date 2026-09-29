@@ -51,10 +51,7 @@
                     </select>
                 </div>
 
-                <div style="margin-bottom: 12px;">
-                    <label>Den ID:</label>
-                    <input type="number" name="den_id" required style="width: 100%; padding: 8px;">
-                </div>
+                
 
                 <div style="margin-bottom: 12px;">
                     <label>Height:</label>

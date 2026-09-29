@@ -1,14 +1,13 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\WelcomeController;
-use App\Http\Controllers\ChickenController;
-use App\Http\Controllers\BreedController;
-use App\Http\Controllers\DenController;
-
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\AdminChickenController;
 use App\Http\Controllers\Admin\AdminBreedController;
+use App\Http\Controllers\Admin\AdminChickenController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\BreedController;
+use App\Http\Controllers\ChickenController;
+use App\Http\Controllers\Userzone\ProfileController;
+use App\Http\Controllers\WelcomeController;
+use Illuminate\Support\Facades\Route;
 
 // Public routes
 Route::get('/', [WelcomeController::class, 'index'])->name('home');
@@ -22,12 +21,9 @@ Route::get('/chickens/{chicken}', [ChickenController::class, 'show'])->name('chi
 Route::get('/breeds', [BreedController::class, 'index'])->name('breeds.index');
 Route::get('/breeds/{breed}', [BreedController::class, 'show'])->name('breeds.show');
 
-Route::get('/dens', [DenController::class, 'index'])->name('dens.index');
-Route::get('/dens/{den}', [DenController::class, 'show'])->name('dens.show');
-
 // Admin routes
 Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
-//Chickens
+// Chickens
 Route::get('/admin/chickens', [AdminChickenController::class, 'index'])->name('admin.chickens.index');
 Route::get('/admin/chickens/create', [AdminChickenController::class, 'create'])->name('admin.chickens.create');
 Route::post('/admin/chickens', [AdminChickenController::class, 'store'])->name('admin.chickens.store');
@@ -37,17 +33,16 @@ Route::delete('/admin/chickens/{chicken}', [AdminChickenController::class, 'dest
 // Breeds
 Route::get('/admin/breeds', [AdminBreedController::class, 'index'])->name('admin.breeds.index');
 
-    
 Route::get('/dashboard', function () {
     return view('userzone.dashboard');
 })
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+        ->middleware(['auth', 'verified'])
+        ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [App\Http\Controllers\Userzone\ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [App\Http\Controllers\Userzone\ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [App\Http\Controllers\Userzone\ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';

@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use Database\Factories\ChickenFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Chicken extends Model
 {
-    /** @use HasFactory<\Database\Factories\ChickenFactory> */
+    /** @use HasFactory<ChickenFactory> */
     use HasFactory;
 
-    protected $fillable = ['name', 'gender', 'birth_date', 'breed_id', 'den_id', 'height', 'weight'];
+    protected $fillable = ['name', 'gender', 'birth_date', 'breed_id', 'height', 'weight'];
 }
