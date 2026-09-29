@@ -18,9 +18,13 @@
     ];
 
     $paths = $icons[$name] ?? null;
+
+    $passed = $attributes->get('class', '');
+    $sized = str_contains($passed, 'h-') || str_contains($passed, 'w-') || str_contains($passed, 'size-');
+    $sizeClass = $sized ? '' : 'h-5 w-5';
 @endphp
 
-<svg {{ $attributes->merge(['class' => 'h-5 w-5']) }}
+<svg {{ $attributes->merge(['class' => $sizeClass]) }}
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
     fill="none"
