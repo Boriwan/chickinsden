@@ -1,11 +1,13 @@
 <?php
 
-test('example', function () {
+test('welcome page renders with navigation', function () {
     $response = $this->get('/');
 
-    $response->assertStatus(200);
+    $response->assertOk();
 
-    $response->assertSee("Welcome to Chickins Den🐓☕️");
-    $response->assertSee("Dens");
-    $response->assertSee("Chickens");
+    $response->assertSee('Welcome to Chickins Den🐓☕️');
+    $response->assertSee(route('chickens.index'));
+    $response->assertSee(route('breeds.index'));
+    $response->assertSee(route('about'));
+    $response->assertSee(route('admin.index'));
 });

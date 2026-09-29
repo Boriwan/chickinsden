@@ -1,29 +1,30 @@
 <x-site-layout>
+    <div class="m-5">
+        <h1 class="mb-4 text-3xl font-bold">Admin view chickens</h1>
 
-    Admin view chickens
-
-    <div>
-        <table style="width: 100%; border-collapse: collapse;">
-            <thead style="background-color: #f99d34; color: white; text-align: left; border: 2px solid #000000;">
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Date of Birth</th>
-                    <th>Breed</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody style="background-color: #f2f2f2; border: 2px solid #000000;">
-                @foreach ($chickens as $chicken)
-                    <tr style="border: 2px solid #000000;">
-                        <td>{{ $chicken->id }}</td>
-                        <td>{{ $chicken->name }}</td>
-                        <td>{{ $chicken->birth_date }}</td>
-                        <td>{{ $chicken->breed_id }}</td>
-                        <td>
-                        </td>
+        <div class="overflow-x-auto">
+            <table class="w-full border-collapse text-left">
+                <thead class="bg-brand text-white">
+                    <tr>
+                        <th class="border border-surface-border px-4 py-2">ID</th>
+                        <th class="border border-surface-border px-4 py-2">Name</th>
+                        <th class="border border-surface-border px-4 py-2">Date of Birth</th>
+                        <th class="border border-surface-border px-4 py-2">Breed</th>
+                        <th class="border border-surface-border px-4 py-2">Actions</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody class="bg-gray-100">
+                    @foreach ($chickens as $chicken)
+                        <tr>
+                            <td class="border border-surface-border px-4 py-2">{{ $chicken->id }}</td>
+                            <td class="border border-surface-border px-4 py-2">{{ $chicken->name }}</td>
+                            <td class="border border-surface-border px-4 py-2">{{ $chicken->birth_date }}</td>
+                            <td class="border border-surface-border px-4 py-2">{{ $chicken->breed_id }}</td>
+                            <td class="border border-surface-border px-4 py-2"></td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
 </x-site-layout>

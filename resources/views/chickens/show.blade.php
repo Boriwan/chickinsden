@@ -1,59 +1,59 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<x-site-layout>
+    <div class="m-5">
+        <div class="flex flex-wrap items-center gap-4">
+            <x-button onclick="window.history.back()">&larr; Back</x-button>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+            <x-button href="{{ route('admin.chickens.edit', $chicken) }}">Edit &#9998;</x-button>
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-
-</head>
-
-<body>
-    <x-site-layout>
-        <div style="margin: 20px;">
-            <button onclick="window.history.back()"
-                style="background-color: #f99d34; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">&larr;
-                Back</button>
-
-            <button onclick="window.location.href='{{ route('admin.chickens.edit', $chicken->id) }}'"
-                style="background-color: #f99d34; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
-                Edit✎</button>
-
-            <form action="{{ route('admin.chickens.destroy', $chicken->id) }}" method="POST" style="display: inline;">
+            <form action="{{ route('admin.chickens.destroy', $chicken) }}" method="POST">
                 @method('DELETE')
                 @csrf
 
-                <button type="submit"
-                    style="color: #ffffff; background-color: #f90000; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
-                    Delete🗑️
-                </button>
+                <x-button type="submit" color="red">Delete &#128465;</x-button>
             </form>
-            <h1 style="font-size: 2rem; font-weight: bold;"> {{ $chicken->name }} 🐓
-                @if ($chicken->gender == 'male')
-                    ♂
-                @else
-                    ♀
-                @endif
-            </h1>
-            <img src="{{ asset('storage/' . $chicken->image) }}" alt="{{ $chicken->name }}"
-                style="max-width: 300px; border-radius: 10px; margin-top: 20px;">
-            <div style="margin-top: 20px;">
-                <ul style="list-style-type: none; padding: 0; font-size: 1.2rem;">
-                    <li>Age: {{ \Carbon\Carbon::parse($chicken->birth_date)->age }}</li>
-                    <li>Born: {{ $chicken->birth_date }}</li>
-                    <a href="/breeds/{{ $chicken->breed_id }}" style="text-decoration: underline; color: #f99d34;">
-                        <li>Breed: {{ $chicken->breed_id }}</li>
-                    </a>
-                    <li>Height: {{ $chicken->height }} cm</li>
-                    <li>Weight: {{ $chicken->weight }}</li>
-                    
-                </ul>
-            </div>
-
         </div>
-    </x-site-layout>
-</body>
 
-</html>
+        <h1 class="mt-6 text-3xl font-bold">
+            {{ $chicken->name }} &#128019;
+            @if ($chicken->gender == 'male')
+                &#9794;
+            @else
+                &#9792;
+            @endif
+        </h1>
+
+        @if ($chicken->image)
+            <img src="{{ asset('storage/' . $chicken->image) }}" alt="{{ $chicken->name }}"
+                class="mt-5 h-64 w-64 rounded-lg object-cover">
+        @else
+            <div class="mt-5 flex h-64 w-64 items-center justify-center rounded-lg bg-gray-200 text-gray-400">
+                No image
+            </div>
+        @endif
+
+        <ul class="mt-6 list-none space-y-2 p-0 text-xl">
+            <li>
+                <span class="font-semibold">Birth date:</span>
+                {{ \Carbon\Carbon::parse($chicken->birth_date)->format('d.m.Y') }}
+            </li>
+            <li>
+                <span class="font-semibold">Age:</span>
+                {{ \Carbon\Carbon::parse($chicken->birth_date)->diffForHumans(['parts' => 2, 'syntax' => \Carbon\CarbonInterface::DIFF_ABSOLUTE]) }}
+            </li>
+            <li>
+                <span class="font-semibold">Breed:</span>
+                <a href="{{ route('breeds.show', $chicken->breed_id) }}" class="text-brand underline">
+                    {{ $chicken->breed->name }}
+                </a>
+            </li>
+            <li>
+                <span class="font-semibold">Height:</span>
+                {{ $chicken->height }} cm
+            </li>
+            <li>
+                <span class="font-semibold">Weight:</span>
+                {{ ucfirst($chicken->weight) }}
+            </li>
+        </ul>
+    </div>
+</x-site-layout>

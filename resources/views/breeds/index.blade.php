@@ -1,39 +1,20 @@
 <x-site-layout>
-
-    <h1 style="font-size: 2rem; font-weight: bold; margin: 20px;">My breeds📂</h1>
-
+    <h1 class="m-5 text-3xl font-bold">My breeds📂</h1>
     <hr>
 
-    <div style="
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-        margin: 20px;
-    ">
-
+    <div class="m-5 flex flex-wrap gap-5">
         @foreach ($breeds as $breed)
-            <div
-                style="
-                width: 220px;
-                padding: 20px;
-                border: 1px solid #d6b98c;
-                border-radius: 10px;
-                background-color: #fff9d6;
-            ">
-
-                <h2>
-                    <a href="{{ route('breeds.show', $breed->id) }}" style="text-decoration: underline;">
+            <div class="w-56 rounded-lg border border-surface-border bg-surface p-5">
+                <h2 class="text-xl font-bold">
+                    <a href="{{ route('breeds.show', $breed) }}" class="underline hover:text-brand">
                         {{ $breed->name }}
                     </a>
                 </h2>
 
-                <ul>
+                <ul class="mt-2 list-none p-0">
                     <li>Description: {{ $breed->description }}</li>
                 </ul>
-
             </div>
         @endforeach
-
     </div>
-
 </x-site-layout>

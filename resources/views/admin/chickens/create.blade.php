@@ -1,80 +1,56 @@
-<!DOCTYPE html>
+<x-site-layout>
+    <div class="m-8">
+        <h1 class="mb-4 text-3xl font-bold">Add a new Chicken</h1>
 
+        <form method="POST" action="{{ route('admin.chickens.store') }}"
+            class="max-w-lg space-y-3 rounded-lg bg-[#fff8f0] p-5">
+            @csrf
 
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+            <div>
+                <label for="name" class="block font-bold">Name:</label>
+                <input type="text" name="name" id="name" required
+                    class="mt-1 w-full rounded-md border-gray-300">
+            </div>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+            <div>
+                <label for="gender" class="block font-bold">Gender:</label>
+                <select name="gender" id="gender" class="mt-1 w-full rounded-md border-gray-300">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+            </div>
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
-    <style>
-    </style>
-</head>
+            <div>
+                <label for="birth_date" class="block font-bold">Date of Birth:</label>
+                <input type="date" name="birth_date" id="birth_date" required
+                    class="mt-1 w-full rounded-md border-gray-300">
+            </div>
 
-<body>
-    <x-site-layout>
-        <div style="margin: 2rem;">
-            <h1 style=" font-size: 2rem; font-weight: bold;">Add a new Chicken</h1>
+            <div>
+                <label for="breed_id" class="block font-bold">Breed:</label>
+                <select name="breed_id" id="breed_id" class="mt-1 w-full rounded-md border-gray-300">
+                    @foreach ($breeds as $breed)
+                        <option value="{{ $breed->id }}">{{ $breed->name }}</option>
+                    @endforeach
+                </select>
+            </div>
 
-            <form method="POST" action="{{ route('admin.chickens.store') }}"
-                style="max-width: 500px; padding: 20px; background: #fff8f0; border-radius: 10px;">
+            <div>
+                <label for="height" class="block font-bold">Height (cm):</label>
+                <input type="number" name="height" id="height" step="any" required
+                    class="mt-1 w-full rounded-md border-gray-300">
+            </div>
 
-                @csrf
+            <div>
+                <label for="weight" class="block font-bold">Weight:</label>
+                <select name="weight" id="weight" class="mt-1 w-full rounded-md border-gray-300">
+                    <option value="light">Light</option>
+                    <option value="medium">Medium</option>
+                    <option value="heavy">Heavy</option>
+                </select>
+            </div>
 
-                <div style="margin-bottom: 12px;">
-                    <label>Name:</label>
-                    <input type="text" name="name" required style="width: 100%; padding: 8px;">
-                </div>
-
-                <div style="margin-bottom: 12px;">
-                    <label>Gender:</label>
-                    <select name="gender" style="width: 100%; padding: 8px;">
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                    </select>
-                </div>
-
-                <div style="margin-bottom: 12px;">
-                    <label>Date of Birth:</label>
-                    <input type="date" name="birth_date" required style="width: 100%; padding: 8px;">
-                </div>
-                <div style="margin-bottom: 12px;">
-                    <label>Breed:</label>
-
-                    <select name="breed_id" style="width: 100%; padding: 8px;">
-                        @foreach ($breeds as $breed)
-                            <option value="{{ $breed->id }}">
-                                {{ $breed->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-
-                
-
-                <div style="margin-bottom: 12px;">
-                    <label>Height:</label>
-                    <input type="number" name="height" required style="width: 100%; padding: 8px;">
-                </div>
-
-                <div style="margin-bottom: 15px;">
-                    <label>Weight:</label>
-                    <select name="weight" style="width: 100%; padding: 8px;">
-                        <option value="light">Light</option>
-                        <option value="medium">Medium</option>
-                        <option value="heavy">Heavy</option>
-                    </select>
-                </div>
-
-                <button type="submit"
-                    style="background: #f99d34; color: white; border: none; padding: 10px 20px; border-radius: 5px;">
-                    Create Chicken
-                </button>
-
-            </form>
-        </div>
-    </x-site-layout>
-</body>
-
-</html>
+            <x-button type="submit" class="mt-2">Create Chicken</x-button>
+        </form>
+    </div>
+</x-site-layout>

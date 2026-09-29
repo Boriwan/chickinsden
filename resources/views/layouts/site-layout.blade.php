@@ -1,58 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="font-mono">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Chickins Den🐓🪹☕️</title>
-    <meta name="description" content="">
-    <meta name="keywords" content="">
+    <meta name="description" content="A simple web application for logging and managing your chickens.">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-    <style>
-        html {
-            font-family: Monospace;
-        }
-
-        header div a {
-            text-decoration: none;
-            color: #000;
-            font-weight: bold;
-            padding: 5px 10px;
-        }
-
-        header div a:hover {
-            background-color: #fdbd45;
-            border-radius: 5px;
-            transition: all 0.2s ease;
-        }
-    </style>
 </head>
 
-<body style="background-color: #fff9b9;" class="min-h-screen flex flex-col">
-    <header
-        style="background-color: #f28647;    height: 80px;
-    display: flex;
-    align-items: center;
-    padding: 0 20px;
-    gap: 50px;">
-        <a href="/">
-            <img src="{{ asset('imgs/ChickinsLogo.png') }}" alt="Chicken App"
-                style="width: 90px; height: 90px; object-fit: contain;"> </a>
+<body class="flex min-h-screen flex-col bg-page">
+    <header class="flex h-20 items-center gap-12 bg-shell px-5">
+        <a href="{{ route('home') }}">
+            <img src="{{ asset('imgs/ChickinsLogo.png') }}" alt="Chickins Den" class="h-[90px] w-[90px] object-contain">
+        </a>
 
-        <div style="display: flex; gap: 8rem;">
+        <nav class="flex flex-wrap gap-8">
             @foreach ($menu as $item)
-                <a href="{{ $item['link'] }}"> {{ $item['label'] }} </a>
+                <a href="{{ route($item['route']) }}" class="rounded px-2.5 py-1.5 font-bold transition hover:bg-brand-light">
+                    {{ $item['label'] }}
+                </a>
             @endforeach
-        </div>
+        </nav>
     </header>
 
     <main class="flex-1">
         {{ $slot }}
     </main>
 
-
-    <footer style="background-color: #f28647 ; padding: 15px; text-align: center;">
+    <footer class="bg-shell px-4 py-4 text-center">
         Chickins Den🐓🪹☕️ - &copy; {{ date('Y') }} All rights reserved.
     </footer>
 </body>

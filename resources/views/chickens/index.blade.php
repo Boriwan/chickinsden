@@ -1,66 +1,36 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<x-site-layout>
+    <h1 class="m-5 text-3xl font-bold">My chickens🐓</h1>
+    <hr>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <div class="m-5 flex flex-wrap gap-5">
+        @foreach ($chickens as $chicken)
+            @php
+                $tint = $chicken->gender === 'male' ? 'bg-tint-male' : 'bg-tint-female';
+            @endphp
+            <a href="{{ route('chickens.show', $chicken) }}"
+                class="w-56 rounded-lg border border-surface-border p-5 transition hover:scale-105 {{ $tint }}">
+                <h2 class="text-xl font-bold">
+                    {{ $chicken->name }}
+                    @if ($chicken->gender === 'male')
+                        ♂
+                    @else
+                        ♀
+                    @endif
+                </h2>
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
-    <style>
-        img {
-            border-radius: 10px;
-        }
-        .card {
-            width: 220px;
-            padding: 20px;
-            border: 1px solid #d6b98c;
-            border-radius: 10px;
-            transition: transform 0.2s ease;
-        }
+                @if ($chicken->image)
+                    <img src="{{ asset('storage/' . $chicken->image) }}" alt="{{ $chicken->name }}"
+                        class="mx-auto my-3 h-48 w-48 rounded-lg object-cover">
+                @else
+                    <div class="my-3 flex h-48 w-48 items-center justify-center rounded-lg bg-gray-200 text-gray-400">
+                        No image
+                    </div>
+                @endif
 
-        .card:hover {
-            transform: scale(1.05);
-            cursor: pointer;
-        }
-    </style>
-
-</head>
-
-<body>
-
-    <x-site-layout>
-        <div>
-            <h1 style="font-size: 2rem; font-weight: bold; margin: 20px;">My chickens🐓</h1>
-            <hr>
-
-            <div style="display: flex; flex-wrap: wrap; gap: 20px; margin: 20px;">
-
-                @foreach ($chickens as $chicken)
-                    <a href="/chickens/{{ $chicken->id }}">
-                        <div class="card"
-                            style="background-color: {{ $chicken->gender == 'male' ? '#e8f0ff' : '#fff0f5' }};">
-                            <h2>{{ $chicken->name }}
-                                @if ($chicken->gender == 'male')
-                                    ♂
-                                @else
-                                    ♀
-                                @endif
-                            </h2>
-
-                            <img src="{{ asset('storage/' . $chicken->image) }}" alt="{{ $chicken->name }}"
-                                style=" width: 200px; height: 200px; object-fit: cover; display: block; margin: 10px auto;">
-
-                            <ul>
-                                <li>Age: {{ \Carbon\Carbon::parse($chicken->birth_date)->age }}</li>
-                                
-                            </ul>
-                        </div>
-                    </a>
-                @endforeach
-
-            </div>
-        </div>
-    </x-site-layout>
-</body>
-
-</html>
+                <ul class="list-none p-0">
+                    <li>Age: {{ \Carbon\Carbon::parse($chicken->birth_date)->diffForHumans(['parts' => 2, 'syntax' => \Carbon\CarbonInterface::DIFF_ABSOLUTE]) }}</li>
+                </ul>
+            </a>
+        @endforeach
+    </div>
+</x-site-layout>
