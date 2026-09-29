@@ -22,22 +22,24 @@ Route::get('/breeds', [BreedController::class, 'index'])->name('breeds.index');
 Route::get('/breeds/{breed}', [BreedController::class, 'show'])->name('breeds.show');
 
 // Admin routes
-Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
-// Chickens
-Route::get('/admin/chickens', [AdminChickenController::class, 'index'])->name('admin.chickens.index');
-Route::get('/admin/chickens/create', [AdminChickenController::class, 'create'])->name('admin.chickens.create');
-Route::post('/admin/chickens', [AdminChickenController::class, 'store'])->name('admin.chickens.store');
-Route::get('/admin/chickens/{chicken}', [AdminChickenController::class, 'edit'])->name('admin.chickens.edit');
-Route::put('/admin/chickens/{chicken}', [AdminChickenController::class, 'update'])->name('admin.chickens.update');
-Route::delete('/admin/chickens/{chicken}', [AdminChickenController::class, 'destroy'])->name('admin.chickens.destroy');
-// Breeds
-Route::get('/admin/breeds', [AdminBreedController::class, 'index'])->name('admin.breeds.index');
+Route::middleware('auth')->group(function () {
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+    // Chickens
+    Route::get('/admin/chickens', [AdminChickenController::class, 'index'])->name('admin.chickens.index');
+    Route::get('/admin/chickens/create', [AdminChickenController::class, 'create'])->name('admin.chickens.create');
+    Route::post('/admin/chickens', [AdminChickenController::class, 'store'])->name('admin.chickens.store');
+    Route::get('/admin/chickens/{chicken}', [AdminChickenController::class, 'edit'])->name('admin.chickens.edit');
+    Route::put('/admin/chickens/{chicken}', [AdminChickenController::class, 'update'])->name('admin.chickens.update');
+    Route::delete('/admin/chickens/{chicken}', [AdminChickenController::class, 'destroy'])->name('admin.chickens.destroy');
+    // Breeds
+    Route::get('/admin/breeds', [AdminBreedController::class, 'index'])->name('admin.breeds.index');
+});
 
 Route::get('/dashboard', function () {
     return view('userzone.dashboard');
 })
-        ->middleware(['auth', 'verified'])
-        ->name('dashboard');
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

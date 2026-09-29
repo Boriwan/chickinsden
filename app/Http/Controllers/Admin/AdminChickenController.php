@@ -34,21 +34,16 @@ class AdminChickenController extends Controller
      */
     public function store(Request $request)
     {
-        //    validate($request, [
-        //         'name' => 'required|string|max:255',
-        //         'age' => 'required|integer|min:0',
-        //         'breed' => 'required|string|max:255',
-        //     ]);
-
-        Chicken::create([
-            'name' => $request->input('name'),
-            'gender' => $request->input('gender'),
-            'birth_date' => $request->input('birth_date'),
-            'breed_id' => $request->input('breed_id'),
-
-            'height' => $request->input('height'),
-            'weight' => $request->input('weight'),
+        $validated = $request->validate([
+            'name' => 'required|string|max:20',
+            'gender' => 'required|in:male,female',
+            'birth_date' => 'required|date|after_or_equal:1990-01-01|before_or_equal:today',
+            'breed_id' => 'required|integer|exists:breeds,id',
+            'height' => 'nullable|numeric|min:1|max:100',
+            'weight' => 'nullable|in:light,medium,heavy',
         ]);
+
+        Chicken::create([...$validated, 'user_id' => $request->user()->id]);
 
         return redirect()->route('admin.chickens.index');
     }
@@ -76,22 +71,16 @@ class AdminChickenController extends Controller
      */
     public function update(Request $request, Chicken $chicken)
     {
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:20',
-            'gender' => 'required',
-            'birth_day' => '',
-            'breed_id' => '',
+            'gender' => 'required|in:male,female',
+            'birth_date' => 'required|date|after_or_equal:1990-01-01|before_or_equal:today',
+            'breed_id' => 'required|integer|exists:breeds,id',
+            'height' => 'nullable|numeric|min:1|max:100',
+            'weight' => 'nullable|in:light,medium,heavy',
         ]);
 
-        $chicken->update([
-            'name' => $request->input('name'),
-            'gender' => $request->input('gender'),
-            'birth_date' => $request->input('birth_date'),
-            'breed_id' => $request->input('breed_id'),
-
-            'height' => $request->input('height'),
-            'weight' => $request->input('weight'),
-        ]);
+        $chicken->update($validated);
 
         return redirect()->route('admin.chickens.index');
     }
