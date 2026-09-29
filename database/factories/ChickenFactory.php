@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Breed;
 use App\Models\Chicken;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Storage;
 
@@ -26,6 +27,7 @@ class ChickenFactory extends Factory
             'breed_id' => fn () => Breed::inRandomOrder()->value('id') ?? Breed::factory(),
             'height' => $this->faker->randomFloat(2, 25, 60),
             'weight' => $this->faker->randomElement(['light', 'medium', 'heavy']),
+            'user_id' => fn () => User::inRandomOrder()->value('id') ?? User::factory(),
 
             'image' => fake()->randomElement(Storage::disk('public')->files('chickens_imgs')),
         ];

@@ -21,7 +21,7 @@ return new class extends Migration
 
             $table->string('height')->nullable();
             $table->string('weight')->nullable();
-            $table->foreignId('den_id')->nullable()->constrained('dens');
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->string('image')->nullable();
 
             $table->timestamps();

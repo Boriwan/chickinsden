@@ -12,10 +12,15 @@ class Chicken extends Model
     /** @use HasFactory<ChickenFactory> */
     use HasFactory;
 
-    protected $fillable = ['name', 'gender', 'birth_date', 'breed_id', 'height', 'weight'];
+    protected $fillable = ['name', 'gender', 'birth_date', 'breed_id', 'height', 'weight', 'user_id'];
 
     public function breed(): BelongsTo
     {
         return $this->belongsTo(Breed::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

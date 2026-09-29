@@ -76,6 +76,13 @@ class AdminChickenController extends Controller
      */
     public function update(Request $request, Chicken $chicken)
     {
+        $request->validate([
+            'name' => 'required|string|max:20',
+            'gender' => 'required',
+            'birth_day' => '',
+            'breed_id' => '',
+        ]);
+
         $chicken->update([
             'name' => $request->input('name'),
             'gender' => $request->input('gender'),
