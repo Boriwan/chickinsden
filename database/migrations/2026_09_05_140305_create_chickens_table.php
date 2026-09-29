@@ -16,12 +16,12 @@ return new class extends Migration
 
             $table->string('name');
             $table->string('gender');
-            $table->integer('birth_date');
-            $table->string('breed_id');
+            $table->date('birth_date');
+            $table->foreignId('breed_id')->constrained('breeds');
 
             $table->string('height')->nullable();
             $table->string('weight')->nullable();
-            $table->string('den_id')->nullable();
+            $table->foreignId('den_id')->nullable()->constrained('dens');
             $table->string('image')->nullable();
 
             $table->timestamps();

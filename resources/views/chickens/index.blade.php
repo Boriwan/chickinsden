@@ -47,7 +47,7 @@
                                 @endif
                             </h2>
 
-                            <img src="{{ $chicken->image }}" alt="{{ $chicken->name }}"
+                            <img src="{{ asset('storage/' . $chicken->image) }}" alt="{{ $chicken->name }}"
                                 style=" width: 200px; height: 200px; object-fit: cover; display: block; margin: 10px auto;">
 
                             <ul>

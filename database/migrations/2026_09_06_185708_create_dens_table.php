@@ -16,8 +16,8 @@ return new class extends Migration
             $table->timestamps();
 
             $table->string('name');
-            $table->integer('creation_date');
-            $table->uuid('user_id')->unique();
+            $table->date('creation_date');
+            $table->foreignId('user_id')->constrained('users');
         });
     }
 

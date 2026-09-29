@@ -14,7 +14,7 @@
     <x-site-layout>
         <div>
             <h1>
-                Breeds administraion
+                Breeds administration
             </h1>
             <table style="width: 100%; border-collapse: collapse;">
                 <thead style="background-color: #f99d34; color: white; text-align: left; border: 2px solid #000000;">

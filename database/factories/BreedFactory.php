@@ -18,7 +18,7 @@ class BreedFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->unique()->randomElement(['Dutch Bantam', 'Dominique', 'Dorking', 'Barnevelder', 'Leghorn', 'Plymouth Rock', 'Silkie', 'Sussex', 'Orpington', 'Wyandotte']),
+            'name' => $this->faker->randomElement(['Dutch Bantam', 'Dominique', 'Dorking', 'Barnevelder', 'Leghorn', 'Plymouth Rock', 'Silkie', 'Sussex', 'Orpington', 'Wyandotte']),
             'description' => $this->faker->text(),
         ];
     }

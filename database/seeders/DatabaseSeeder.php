@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use App\Models\Chicken;
 use App\Models\Breed;
+use App\Models\Chicken;
 use App\Models\Den;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -18,16 +18,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        Chicken::factory(12)->create();
-        Breed::factory(4)->create();
-
-        Den::factory(3)->create();
-
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+        Breed::factory(4)->create();
+        Den::factory(3)->create();
+        Chicken::factory(12)->create();
     }
 }

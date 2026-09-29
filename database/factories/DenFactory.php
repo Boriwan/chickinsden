@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Den;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,7 +21,7 @@ class DenFactory extends Factory
         return [
             'name' => $this->faker->randomElement(['My Cozy Nest', 'Lovely den', 'Chicken Paradise', 'Feathered Haven']),
             'creation_date' => $this->faker->date(),
-            'user_id' => $this->faker->uuid(),
+            'user_id' => User::factory(),
         ];
     }
 }
