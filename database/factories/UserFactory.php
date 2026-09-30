@@ -43,4 +43,27 @@ class UserFactory extends Factory
             'email_verified_at' => null,
         ]);
     }
+
+    /**
+     * Indicate that the user is an admin.
+     */
+    public function admin(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'is_admin' => true,
+        ]);
+    }
+
+    /**
+     * Indicate that the user is an ordinary, non-admin user.
+     *
+     * The default state is a 25% chance of being an admin, so any test that
+     * depends on a user NOT being an admin must ask for this state.
+     */
+    public function regular(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'is_admin' => false,
+        ]);
+    }
 }
