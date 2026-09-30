@@ -17,13 +17,15 @@ class User extends Authenticatable
     /**
      * The attributes that are mass assignable.
      *
+     * `is_admin` is deliberately absent: it must never be settable from a form.
+     * The seeder still sets it because factories run outside mass-assignment guards.
+     *
      * @var list<string>
      */
     protected $fillable = [
         'name',
         'email',
         'password',
-        'isAdmin  ',
     ];
 
     /**
@@ -46,6 +48,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_admin' => 'boolean',
         ];
     }
 
