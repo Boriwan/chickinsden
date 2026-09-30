@@ -22,6 +22,7 @@ export default {
                     600: '#e88c2a',
                     700: '#c96f14',
                     800: '#a8560c',
+                    900: '#6b3407',
                 },
                 shell: '#eea34f',
                 page: '#fdfaf3',
