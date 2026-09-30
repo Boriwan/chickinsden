@@ -31,12 +31,15 @@
                 </p>
 
                 <div class="flex flex-wrap items-center justify-center gap-3">
-                    <x-button href="{{ route('login') }}">
-                        <x-icon name="user" class="h-4 w-4" />
-                        Log in
+                    <x-button href="{{ route('register') }}">
+                        <x-icon name="user-plus" class="h-4 w-4" />
+                        Create an account
                     </x-button>
 
-                    <x-button color="gray" href="{{ route('register') }}">Create an account</x-button>
+                    <x-button color="gray" href="{{ route('login') }}">
+                        <x-icon name="user" class="h-4 w-4" />
+                        I already have an account
+                    </x-button>
                 </div>
             </div>
         @endauth

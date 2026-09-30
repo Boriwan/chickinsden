@@ -17,11 +17,16 @@ class SiteLayout extends Component
     {
         $user = auth()->user();
 
-        $this->menu = [
-            ['label' => 'Chickens', 'route' => 'chickens.index', 'icon' => 'egg'],
-            ['label' => 'Breeds Wiki', 'route' => 'breeds.index', 'icon' => 'book'],
-            ['label' => 'About', 'route' => 'about', 'icon' => 'info'],
-        ];
+        $this->menu = [];
+
+        // Chickens are private, so the link is hidden from guests rather than
+        // offering a link that would bounce them to the login screen.
+        if ($user) {
+            $this->menu[] = ['label' => 'Chickens', 'route' => 'chickens.index', 'icon' => 'egg'];
+        }
+
+        $this->menu[] = ['label' => 'Breeds Wiki', 'route' => 'breeds.index', 'icon' => 'book'];
+        $this->menu[] = ['label' => 'About', 'route' => 'about', 'icon' => 'info'];
 
         if ($user) {
             if ($user->is_admin) {
@@ -31,6 +36,12 @@ class SiteLayout extends Component
             $this->menu[] = ['label' => 'Add Chicken', 'route' => 'chickens.create', 'icon' => 'plus'];
         } else {
             $this->menu[] = ['label' => 'Login', 'route' => 'login', 'icon' => 'user'];
+            $this->menu[] = [
+                'label' => 'Register',
+                'route' => 'register',
+                'icon' => 'user-plus',
+                'highlight' => true,
+            ];
         }
     }
 

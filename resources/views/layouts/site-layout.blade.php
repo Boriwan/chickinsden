@@ -29,8 +29,9 @@
 
                 <a href="{{ $itemRoute ? route($itemRoute) : '#' }}" @class([
                     'flex items-center gap-2 rounded-lg px-3 py-2 font-semibold transition',
-                    'bg-white/60 text-stone-900' => $isCurrentRoute,
-                    'text-stone-800 hover:bg-white/40' => !$isCurrentRoute,
+                    'bg-brand-500 text-stone-900 hover:bg-brand-600' => $item['highlight'] ?? false,
+                    'bg-white/60 text-stone-900' => ! ($item['highlight'] ?? false) && $isCurrentRoute,
+                    'text-stone-800 hover:bg-white/40' => ! ($item['highlight'] ?? false) && ! $isCurrentRoute,
                 ])>
                     <x-icon :name="$item['icon']" class="h-5 w-5 shrink-0" />
                     <span>{{ $item['label'] }}</span>

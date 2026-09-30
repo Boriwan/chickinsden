@@ -68,9 +68,54 @@ it('shows the admin link to an admin', function () {
     $response->assertDontSee(route('login'));
 });
 
-it('no longer links to a dashboard route from the navigation', function () {
-    $response = $this->actingAs(User::factory()->admin()->create())
+it('hides the chickens link from guests', function () {
+    $response = $this->get(route('about'));
+
+    $response->assertOk();
+    $response->assertDontSee(route('chickens.index'));
+    $response->assertSee(route('breeds.index'));
+    $response->assertSee(route('login'));
+    $response->assertSee(route('register'));
+});
+
+it('shows the chickens link once signed in', function () {
+    $response = $this->actingAs(User::factory()->regular()->create())
         ->get(route('chickens.index'));
 
-    $response->assertDontSee('>Dashboard<');
+    $response->assertOk();
+    $response->assertSee(route('chickens.index'));
+});
+
+it('always sends a login to the home page', function () {
+    User::factory()->regular()->create([
+        'email' => 'keeper@example.com',
+        'password' => 'password',
+    ]);
+
+    $response = $this->post(route('login'), [
+        'email' => 'keeper@example.com',
+        'password' => 'password',
+    ]);
+
+    $response->assertRedirect(route('home'));
+    $this->assertAuthenticated();
+});
+
+it('sends a login to the home page even after being bounced from a protected page', function () {
+    User::factory()->regular()->create([
+        'email' => 'keeper@example.com',
+        'password' => 'password',
+    ]);
+
+    // Bouncing off the protected page would normally record it as the
+    // intended destination and send the user back there after logging in.
+    $this->get(route('chickens.index'))->assertRedirect(route('login'));
+
+    $response = $this->post(route('login'), [
+        'email' => 'keeper@example.com',
+        'password' => 'password',
+    ]);
+
+    $response->assertRedirect(route('home'));
+    $this->assertAuthenticated();
 });
