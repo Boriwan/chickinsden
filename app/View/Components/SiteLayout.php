@@ -35,7 +35,7 @@ class SiteLayout extends Component
 
             $this->menu[] = ['label' => 'Add Chicken', 'route' => 'chickens.create', 'icon' => 'plus'];
         } else {
-            $this->menu[] = ['label' => 'Login', 'route' => 'login', 'icon' => 'user'];
+            $this->menu[] = ['label' => 'Login', 'route' => 'login', 'icon' => 'user', 'outline' => true];
             $this->menu[] = [
                 'label' => 'Register',
                 'route' => 'register',

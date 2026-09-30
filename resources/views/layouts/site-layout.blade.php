@@ -25,13 +25,16 @@
                 @php
                     $itemRoute = is_array($item) ? ($item['route'] ?? null) : null;
                     $isCurrentRoute = is_string($itemRoute) && request()->routeIs($itemRoute);
+                    $isHighlighted = $item['highlight'] ?? false;
+                    $isOutlined = $item['outline'] ?? false;
                 @endphp
 
                 <a href="{{ $itemRoute ? route($itemRoute) : '#' }}" @class([
                     'flex items-center gap-2 rounded-lg px-3 py-2 font-semibold transition',
-                    'bg-white text-brand-800 shadow-sm ring-1 ring-black/5 hover:bg-brand-50 hover:shadow' => $item['highlight'] ?? false,
-                    'bg-white/60 text-stone-900' => ! ($item['highlight'] ?? false) && $isCurrentRoute,
-                    'text-stone-800 hover:bg-white/40' => ! ($item['highlight'] ?? false) && ! $isCurrentRoute,
+                    'border-2 border-transparent bg-white text-brand-800 shadow-sm ring-1 ring-black/5 hover:bg-brand-50 hover:shadow' => $isHighlighted,
+                    'border-2 border-brand-900 text-brand-900 hover:bg-brand-900/10' => $isOutlined,
+                    'bg-white/60 text-stone-900' => ! $isHighlighted && ! $isOutlined && $isCurrentRoute,
+                    'text-stone-800 hover:bg-white/40' => ! $isHighlighted && ! $isOutlined && ! $isCurrentRoute,
                 ])>
                     <x-icon :name="$item['icon']" class="h-5 w-5 shrink-0" />
                     <span>{{ $item['label'] }}</span>
