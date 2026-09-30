@@ -50,6 +50,22 @@
         </nav>
     </header>
 
+    @if (session('status'))
+        <div class="mx-auto w-full max-w-6xl px-5 pt-5">
+            <div class="rounded-lg border border-brand-200 bg-brand-50 px-4 py-3 text-sm font-medium text-brand-700">
+                {{ session('status') }}
+            </div>
+        </div>
+    @endif
+
+    @if ($errors->any() && ! $errors->has('userDeletion'))
+        <div class="mx-auto w-full max-w-6xl px-5 pt-5">
+            <div class="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700">
+                {{ $errors->first() }}
+            </div>
+        </div>
+    @endif
+
     <main class="flex-1">
         {{ $slot }}
     </main>

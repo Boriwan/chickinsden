@@ -6,20 +6,23 @@
                 Back
             </x-button>
 
-            <x-button href="{{ route('chickens.edit', $chicken) }}">
-                <x-icon name="pencil" class="h-4 w-4" />
-                Edit
-            </x-button>
-
-            <form action="{{ route('chickens.destroy', $chicken) }}" method="POST">
-                @method('DELETE')
-                @csrf
-
-                <x-button type="submit" color="red">
-                    <x-icon name="trash" class="h-4 w-4" />
-                    Delete
+            @can('update', $chicken)
+                <x-button href="{{ route('chickens.edit', $chicken) }}">
+                    <x-icon name="pencil" class="h-4 w-4" />
+                    Edit
                 </x-button>
-            </form>
+
+                <form action="{{ route('chickens.destroy', $chicken) }}" method="POST"
+                    onsubmit="return confirm('Delete {{ $chicken->name }}? This cannot be undone.')">
+                    @method('DELETE')
+                    @csrf
+
+                    <x-button type="submit" color="red">
+                        <x-icon name="trash" class="h-4 w-4" />
+                        Delete
+                    </x-button>
+                </form>
+            @endcan
         </div>
 
         <div class="mb-6 flex flex-wrap items-center gap-3">

@@ -1,7 +1,7 @@
 <x-site-layout>
     <div class="mx-auto max-w-6xl px-5 py-8">
         <div class="mb-6 flex flex-wrap items-center justify-between gap-4">
-            <h1 class="text-3xl font-bold text-stone-900">Chickens</h1>
+            <h1 class="text-3xl font-bold text-stone-900">All chickens</h1>
 
             <x-button href="{{ route('chickens.create') }}">
                 <x-icon name="plus" class="h-4 w-4" />
@@ -14,7 +14,7 @@
                 <div class="flex flex-col items-center gap-2 px-6 py-16 text-center">
                     <x-icon name="inbox" class="h-10 w-10 text-stone-300" />
                     <p class="font-semibold text-stone-900">No chickens yet</p>
-                    <p class="text-sm text-stone-500">Add your first chicken to get started.</p>
+                    <p class="text-sm text-stone-500">Chickens added by any user will appear here.</p>
                 </div>
             @else
                 <table class="w-full text-left text-sm">
@@ -23,6 +23,7 @@
                         <tr>
                             <th class="px-4 py-3 font-semibold">ID</th>
                             <th class="px-4 py-3 font-semibold">Name</th>
+                            <th class="px-4 py-3 font-semibold">Owner</th>
                             <th class="px-4 py-3 font-semibold">Birth date</th>
                             <th class="px-4 py-3 font-semibold">Breed</th>
                             <th class="px-4 py-3 font-semibold">Actions</th>
@@ -33,19 +34,41 @@
                             <tr class="transition hover:bg-brand-50/50">
                                 <td class="px-4 py-3 text-stone-500">{{ $chicken->id }}</td>
 
-                                <td class="underline px-4 py-3 font-medium text-stone-900"> <a
-                                        href="{{ route('chickens.show', $chicken) }}">{{ $chicken->name }}</a></td>
+                                <td class="px-4 py-3">
+                                    <a href="{{ route('chickens.show', $chicken) }}"
+                                        class="font-medium text-stone-900 underline">
+                                        {{ $chicken->name }}
+                                    </a>
+                                </td>
+
+                                <td class="px-4 py-3 text-stone-600">{{ $chicken->user?->name ?? 'Unknown' }}</td>
 
                                 <td class="px-4 py-3 text-stone-600">
                                     {{ \Carbon\Carbon::parse($chicken->birth_date)->format('d.m.Y') }}
                                 </td>
+
                                 <td class="px-4 py-3 text-stone-600">{{ $chicken->breed?->name ?? '—' }}</td>
+
                                 <td class="px-4 py-3">
-                                    <a href="{{ route('chickens.edit', $chicken) }}"
-                                        class="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 font-medium text-stone-600 transition hover:bg-stone-100 hover:text-stone-900">
-                                        <x-icon name="pencil" class="h-4 w-4" />
-                                        Edit
-                                    </a>
+                                    <div class="flex items-center gap-1">
+                                        <a href="{{ route('chickens.edit', $chicken) }}"
+                                            class="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 font-medium text-stone-600 transition hover:bg-stone-100 hover:text-stone-900">
+                                            <x-icon name="pencil" class="h-4 w-4" />
+                                            Edit
+                                        </a>
+
+                                        <form method="POST" action="{{ route('chickens.destroy', $chicken) }}"
+                                            onsubmit="return confirm('Delete {{ $chicken->name }}? This cannot be undone.')">
+                                            @csrf
+                                            @method('DELETE')
+
+                                            <button type="submit"
+                                                class="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 font-medium text-red-600 transition hover:bg-red-50 hover:text-red-700">
+                                                <x-icon name="trash" class="h-4 w-4" />
+                                                Delete
+                                            </button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach
@@ -53,5 +76,11 @@
                 </table>
             @endif
         </div>
+
+        @if ($chickens->hasPages())
+            <div class="mt-6">
+                {{ $chickens->links() }}
+            </div>
+        @endif
     </div>
 </x-site-layout>
