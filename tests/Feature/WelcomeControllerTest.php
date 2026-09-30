@@ -18,7 +18,7 @@ test('admin navigation is hidden from guests', function () {
     $response = $this->get('/');
 
     $response->assertDontSee(route('admin.index'));
-    $response->assertDontSee(route('admin.chickens.create'));
+    $response->assertDontSee(route('chickens.create'));
 });
 
 test('admin navigation is shown to authenticated users', function () {
@@ -28,7 +28,7 @@ test('admin navigation is shown to authenticated users', function () {
 
     $response->assertOk();
     $response->assertSee(route('admin.index'));
-    $response->assertSee(route('admin.chickens.create'));
+    $response->assertSee(route('chickens.create'));
     $response->assertSee(route('logout'));
     $response->assertDontSee(route('login'));
 });

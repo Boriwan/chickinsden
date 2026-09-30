@@ -3,7 +3,7 @@
         <div class="mb-6 flex flex-wrap items-center justify-between gap-4">
             <h1 class="text-3xl font-bold text-stone-900">Chickens</h1>
 
-            <x-button href="{{ route('admin.chickens.create') }}">
+            <x-button href="{{ route('chickens.create') }}">
                 <x-icon name="plus" class="h-4 w-4" />
                 Add chicken
             </x-button>
@@ -18,7 +18,8 @@
                 </div>
             @else
                 <table class="w-full text-left text-sm">
-                    <thead class="border-b border-surface-border bg-brand-50 text-xs uppercase tracking-wide text-brand-700">
+                    <thead
+                        class="border-b border-surface-border bg-brand-50 text-xs uppercase tracking-wide text-brand-700">
                         <tr>
                             <th class="px-4 py-3 font-semibold">ID</th>
                             <th class="px-4 py-3 font-semibold">Name</th>
@@ -31,13 +32,16 @@
                         @foreach ($chickens as $chicken)
                             <tr class="transition hover:bg-brand-50/50">
                                 <td class="px-4 py-3 text-stone-500">{{ $chicken->id }}</td>
-                                <td class="px-4 py-3 font-medium text-stone-900">{{ $chicken->name }}</td>
+
+                                <td class="underline px-4 py-3 font-medium text-stone-900"> <a
+                                        href="{{ route('chickens.show', $chicken) }}">{{ $chicken->name }}</a></td>
+
                                 <td class="px-4 py-3 text-stone-600">
                                     {{ \Carbon\Carbon::parse($chicken->birth_date)->format('d.m.Y') }}
                                 </td>
                                 <td class="px-4 py-3 text-stone-600">{{ $chicken->breed?->name ?? '—' }}</td>
                                 <td class="px-4 py-3">
-                                    <a href="{{ route('admin.chickens.edit', $chicken) }}"
+                                    <a href="{{ route('chickens.edit', $chicken) }}"
                                         class="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 font-medium text-stone-600 transition hover:bg-stone-100 hover:text-stone-900">
                                         <x-icon name="pencil" class="h-4 w-4" />
                                         Edit

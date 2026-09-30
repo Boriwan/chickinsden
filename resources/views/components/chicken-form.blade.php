@@ -22,7 +22,7 @@
 @endphp
 
 <form method="POST"
-    action="{{ $editing ? route('admin.chickens.update', $chicken) : route('admin.chickens.store') }}"
+    action="{{ $editing ? route('chickens.update', $chicken) : route('chickens.store') }}"
     class="space-y-4 rounded-xl border border-surface-border bg-surface p-6 shadow-sm">
     @csrf
 

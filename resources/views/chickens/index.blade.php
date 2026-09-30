@@ -3,7 +3,7 @@
         <div class="mb-6 flex flex-wrap items-center justify-between gap-4">
             <h1 class="text-3xl font-bold text-stone-900">My chickens</h1>
 
-            <x-button href="{{ route('admin.chickens.create') }}">
+            <x-button href="{{ route('chickens.create') }}">
                 <x-icon name="plus" class="h-4 w-4" />
                 Add chicken
             </x-button>
@@ -16,7 +16,7 @@
                     <p class="font-semibold text-stone-900">No chickens yet</p>
                     <p class="text-sm text-stone-500">Add your first chicken to start tracking them.</p>
                 </div>
-                <x-button href="{{ route('admin.chickens.create') }}">
+                <x-button href="{{ route('chickens.create') }}">
                     <x-icon name="plus" class="h-4 w-4" />
                     Add chicken
                 </x-button>

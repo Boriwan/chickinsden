@@ -6,12 +6,12 @@
                 Back
             </x-button>
 
-            <x-button href="{{ route('admin.chickens.edit', $chicken) }}">
+            <x-button href="{{ route('chickens.edit', $chicken) }}">
                 <x-icon name="pencil" class="h-4 w-4" />
                 Edit
             </x-button>
 
-            <form action="{{ route('admin.chickens.destroy', $chicken) }}" method="POST">
+            <form action="{{ route('chickens.destroy', $chicken) }}" method="POST">
                 @method('DELETE')
                 @csrf
 

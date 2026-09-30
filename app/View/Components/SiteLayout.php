@@ -23,7 +23,7 @@ class SiteLayout extends Component
 
         if (auth()->check()) {
             $this->menu[] = ['label' => 'Admin', 'route' => 'admin.index', 'icon' => 'settings'];
-            $this->menu[] = ['label' => 'Add Chicken', 'route' => 'admin.chickens.create', 'icon' => 'plus'];
+            $this->menu[] = ['label' => 'Add Chicken', 'route' => 'chickens.create', 'icon' => 'plus'];
         } else {
             $this->menu[] = ['label' => 'Login', 'route' => 'login', 'icon' => 'user'];
         }
