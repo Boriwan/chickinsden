@@ -5,7 +5,7 @@ use App\Models\User;
 
 it('redirects a guest away from the chicken pages', function (string $path) {
     $this->get($path)->assertRedirect(route('login'));
-})->with(['/chickens', '/chickens/create', '/dashboard', '/admin', '/admin/chickens']);
+})->with(['/chickens', '/chickens/create', '/admin', '/admin/chickens']);
 
 it('forbids a non-admin from the admin area', function (string $path) {
     $this->actingAs(User::factory()->regular()->create())

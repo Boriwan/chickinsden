@@ -19,13 +19,11 @@ class SiteLayout extends Component
 
         $this->menu = [
             ['label' => 'Chickens', 'route' => 'chickens.index', 'icon' => 'egg'],
-            ['label' => 'Breeds Wiki', 'route' => 'breeds.index', 'icon' => 'folder'],
+            ['label' => 'Breeds Wiki', 'route' => 'breeds.index', 'icon' => 'book'],
             ['label' => 'About', 'route' => 'about', 'icon' => 'info'],
         ];
 
         if ($user) {
-            $this->menu[] = ['label' => 'Dashboard', 'route' => 'dashboard', 'icon' => 'user'];
-
             if ($user->is_admin) {
                 $this->menu[] = ['label' => 'Admin', 'route' => 'admin.index', 'icon' => 'settings'];
             }

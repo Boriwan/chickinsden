@@ -1,6 +1,6 @@
 <x-site-layout>
     <div class="mx-auto max-w-6xl px-5 py-8">
-        <h1 class="mb-6 text-3xl font-bold text-stone-900">My breeds</h1>
+        <h1 class="mb-6 text-3xl font-bold text-stone-900">Breeds Wiki</h1>
 
         @if ($breeds->isEmpty())
             <div class="flex flex-col items-center gap-4 rounded-xl border border-dashed border-surface-border bg-surface px-6 py-16 text-center">

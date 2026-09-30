@@ -5,7 +5,6 @@ use App\Http\Controllers\Admin\AdminChickenController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\BreedController;
 use App\Http\Controllers\ChickenController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Userzone\ProfileController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
@@ -35,8 +34,6 @@ Route::get('/breeds/{breed}', [BreedController::class, 'show'])->name('breeds.sh
 */
 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
     Route::resource('chickens', ChickenController::class);
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

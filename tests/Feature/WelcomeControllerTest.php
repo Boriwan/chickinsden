@@ -1,26 +1,50 @@
 <?php
 
+use App\Models\Chicken;
 use App\Models\User;
 
-it('shows the welcome page and a login link to guests', function () {
+it('shows the welcome page with a login link to guests', function () {
     $response = $this->get('/');
 
     $response->assertOk();
     $response->assertSee('Welcome to Chickins Den');
     $response->assertSee(route('login'));
+    $response->assertSee(route('register'));
     $response->assertDontSee(route('admin.index'));
+    $response->assertDontSee('Recently added');
 });
 
-it('sends signed-in users from the home page to their dashboard', function () {
-    $response = $this->actingAs(User::factory()->regular()->create())->get('/');
+it('shows a welcome message and the dashboard to a signed-in user', function () {
+    $user = User::factory()->regular()->create(['name' => 'Bella Keeper']);
+    Chicken::factory()->create(['user_id' => $user->id, 'name' => 'Nugget']);
 
-    $response->assertRedirect(route('dashboard'));
+    $response = $this->actingAs($user)->get('/');
+
+    $response->assertOk();
+    $response->assertSee('Welcome back, Bella');
+    $response->assertSee('Recently added');
+    $response->assertSee('Nugget');
+    $response->assertSee('Chickens');
 });
 
-it('sends admins from the home page to their dashboard too', function () {
-    $response = $this->actingAs(User::factory()->admin()->create())->get('/');
+it('shows the dashboard to an admin as well', function () {
+    $response = $this->actingAs(User::factory()->admin()->create(['name' => 'Alex Admin']))->get('/');
 
-    $response->assertRedirect(route('dashboard'));
+    $response->assertOk();
+    $response->assertSee('Welcome back, Alex');
+    $response->assertSee('Recently added');
+    $response->assertSee('Admin area');
+});
+
+it('does not show another users chickens on the home page', function () {
+    $user = User::factory()->regular()->create();
+    Chicken::factory()->create(['user_id' => $user->id, 'name' => 'Miney']);
+    Chicken::factory()->create(['user_id' => User::factory()->create()->id, 'name' => 'Theirs']);
+
+    $response = $this->actingAs($user)->get('/');
+
+    $response->assertSee('Miney');
+    $response->assertDontSee('Theirs');
 });
 
 it('hides the admin link from a non-admin', function () {
@@ -42,4 +66,11 @@ it('shows the admin link to an admin', function () {
     $response->assertSee(route('chickens.create'));
     $response->assertSee(route('logout'));
     $response->assertDontSee(route('login'));
+});
+
+it('no longer links to a dashboard route from the navigation', function () {
+    $response = $this->actingAs(User::factory()->admin()->create())
+        ->get(route('chickens.index'));
+
+    $response->assertDontSee('>Dashboard<');
 });
