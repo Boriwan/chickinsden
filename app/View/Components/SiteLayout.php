@@ -15,14 +15,21 @@ class SiteLayout extends Component
      */
     public function __construct()
     {
+        $user = auth()->user();
+
         $this->menu = [
             ['label' => 'Chickens', 'route' => 'chickens.index', 'icon' => 'egg'],
-            ['label' => 'Breeds', 'route' => 'breeds.index', 'icon' => 'folder'],
+            ['label' => 'Breeds Wiki', 'route' => 'breeds.index', 'icon' => 'folder'],
             ['label' => 'About', 'route' => 'about', 'icon' => 'info'],
         ];
 
-        if (auth()->check()) {
-            $this->menu[] = ['label' => 'Admin', 'route' => 'admin.index', 'icon' => 'settings'];
+        if ($user) {
+            $this->menu[] = ['label' => 'Dashboard', 'route' => 'dashboard', 'icon' => 'user'];
+
+            if ($user->is_admin) {
+                $this->menu[] = ['label' => 'Admin', 'route' => 'admin.index', 'icon' => 'settings'];
+            }
+
             $this->menu[] = ['label' => 'Add Chicken', 'route' => 'chickens.create', 'icon' => 'plus'];
         } else {
             $this->menu[] = ['label' => 'Login', 'route' => 'login', 'icon' => 'user'];

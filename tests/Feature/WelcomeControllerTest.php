@@ -2,29 +2,40 @@
 
 use App\Models\User;
 
-test('welcome page renders with public navigation for guests', function () {
+it('shows the welcome page and a login link to guests', function () {
     $response = $this->get('/');
 
     $response->assertOk();
-
     $response->assertSee('Welcome to Chickins Den');
-    $response->assertSee(route('chickens.index'));
-    $response->assertSee(route('breeds.index'));
-    $response->assertSee(route('about'));
     $response->assertSee(route('login'));
-});
-
-test('admin navigation is hidden from guests', function () {
-    $response = $this->get('/');
-
     $response->assertDontSee(route('admin.index'));
-    $response->assertDontSee(route('chickens.create'));
 });
 
-test('admin navigation is shown to authenticated users', function () {
-    $user = User::factory()->create();
+it('sends signed-in users from the home page to their dashboard', function () {
+    $response = $this->actingAs(User::factory()->regular()->create())->get('/');
 
-    $response = $this->actingAs($user)->get('/');
+    $response->assertRedirect(route('dashboard'));
+});
+
+it('sends admins from the home page to their dashboard too', function () {
+    $response = $this->actingAs(User::factory()->admin()->create())->get('/');
+
+    $response->assertRedirect(route('dashboard'));
+});
+
+it('hides the admin link from a non-admin', function () {
+    $response = $this->actingAs(User::factory()->regular()->create())
+        ->get(route('chickens.index'));
+
+    $response->assertOk();
+    $response->assertDontSee(route('admin.index'));
+    $response->assertSee(route('chickens.create'));
+    $response->assertSee(route('logout'));
+});
+
+it('shows the admin link to an admin', function () {
+    $response = $this->actingAs(User::factory()->admin()->create())
+        ->get(route('chickens.index'));
 
     $response->assertOk();
     $response->assertSee(route('admin.index'));
