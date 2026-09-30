@@ -22,7 +22,7 @@ class SiteLayout extends Component
         // Chickens are private, so the link is hidden from guests rather than
         // offering a link that would bounce them to the login screen.
         if ($user) {
-            $this->menu[] = ['label' => 'Chickens', 'route' => 'chickens.index', 'icon' => 'egg'];
+            $this->menu[] = ['label' => 'My chickens', 'route' => 'chickens.index', 'icon' => 'egg'];
         }
 
         $this->menu[] = ['label' => 'Breeds Wiki', 'route' => 'breeds.index', 'icon' => 'book'];

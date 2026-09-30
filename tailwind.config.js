@@ -21,6 +21,7 @@ export default {
                     500: '#f99d34',
                     600: '#e88c2a',
                     700: '#c96f14',
+                    800: '#a8560c',
                 },
                 shell: '#eea34f',
                 page: '#fdfaf3',

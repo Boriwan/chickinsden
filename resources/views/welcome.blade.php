@@ -5,7 +5,7 @@
                 <div class="mb-3 flex items-center justify-center gap-3">
                     <x-icon name="egg" class="h-9 w-9 text-brand-500" />
                     <h1 class="text-4xl font-bold text-stone-900">
-                        Welcome back, {{ str(auth()->user()->name)->explode(' ')->first() }}
+                        Welcome back, {{ str(auth()->user()->name) }}
                     </h1>
                 </div>
 

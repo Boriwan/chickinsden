@@ -29,7 +29,7 @@
 
                 <a href="{{ $itemRoute ? route($itemRoute) : '#' }}" @class([
                     'flex items-center gap-2 rounded-lg px-3 py-2 font-semibold transition',
-                    'bg-brand-500 text-stone-900 hover:bg-brand-600' => $item['highlight'] ?? false,
+                    'bg-white text-brand-800 shadow-sm ring-1 ring-black/5 hover:bg-brand-50 hover:shadow' => $item['highlight'] ?? false,
                     'bg-white/60 text-stone-900' => ! ($item['highlight'] ?? false) && $isCurrentRoute,
                     'text-stone-800 hover:bg-white/40' => ! ($item['highlight'] ?? false) && ! $isCurrentRoute,
                 ])>
