@@ -9,7 +9,7 @@
                     </h1>
                 </div>
 
-                <p class="text-lg text-stone-600">Here is what is happening with your flock.</p>
+                <p class="text-lg text-stone-600">Here is what is happening with your den.</p>
             </div>
 
             <x-dashboard :stats="$stats" :recent="$recent" :breed-breakdown="$breedBreakdown" />
@@ -27,7 +27,7 @@
 
                 <p class="mb-10 text-left leading-relaxed text-stone-500">
                     Every chicken gets a profile with a photo, age, breed and traits, so you always have the details
-                    of your flock at a glance. Admins can manage all chickens, breeds and traits from one place.
+                    of your den at a glance. Admins can manage all chickens, breeds and traits from one place.
                 </p>
 
                 <div class="flex flex-wrap items-center justify-center gap-3">

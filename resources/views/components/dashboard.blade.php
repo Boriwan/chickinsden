@@ -13,7 +13,7 @@
         </span>
         <span>
             <span class="block font-semibold text-stone-900">Add a chicken</span>
-            <span class="block text-sm text-stone-500">Log a new member of your flock</span>
+            <span class="block text-sm text-stone-500">Log a new member of your den</span>
         </span>
     </a>
 
@@ -24,7 +24,7 @@
         </span>
         <span>
             <span class="block font-semibold text-stone-900">My chickens</span>
-            <span class="block text-sm text-stone-500">Browse your whole flock</span>
+            <span class="block text-sm text-stone-500">Browse your whole den</span>
         </span>
     </a>
 
@@ -119,7 +119,7 @@
 
     <div class="rounded-xl border border-surface-border bg-surface shadow-sm">
         <h2 class="border-b border-surface-border px-4 py-3 font-semibold text-stone-900">
-            Your breeds
+            {{ auth()->user()->is_admin ? 'Breeds across all dens' : 'Your breeds' }}
         </h2>
 
         @if ($breedBreakdown->isEmpty())
@@ -128,20 +128,7 @@
                 <p class="text-sm text-stone-500">No chickens yet, so no breakdown to show.</p>
             </div>
         @else
-            <div class="space-y-3 p-4">
-                @foreach ($breedBreakdown as $breedName => $count)
-                    <div>
-                        <div class="mb-1 flex items-center justify-between text-sm">
-                            <span class="font-medium text-stone-700">{{ $breedName }}</span>
-                            <span class="text-stone-500">{{ $count }}</span>
-                        </div>
-                        <div class="h-2 w-full overflow-hidden rounded-full bg-stone-100">
-                            <div class="h-full rounded-full bg-brand-400"
-                                style="width: {{ round($count / max($stats['total'], 1) * 100) }}%"></div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
+            <x-egg-treemap :data="$breedBreakdown" />
         @endif
     </div>
 </div>

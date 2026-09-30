@@ -13,7 +13,7 @@ class WelcomeController extends Controller
      */
     public function index(Request $request): View
     {
-        $data = $request->user() ? $this->flockSummary($request) : [];
+        $data = $request->user() ? $this->denSummary($request) : [];
 
         return view('welcome', $data);
     }
@@ -28,7 +28,7 @@ class WelcomeController extends Controller
      *
      * @return array<string, mixed>
      */
-    private function flockSummary(Request $request): array
+    private function denSummary(Request $request): array
     {
         $chickens = Chicken::where('user_id', $request->user()->id);
 
@@ -45,13 +45,14 @@ class WelcomeController extends Controller
             ->take(5)
             ->get();
 
-        $breedBreakdown = (clone $chickens)
-            ->with('breed')
+        // Ordinary users see the breeds of their own den; admins, who can
+        // already see every chicken in the admin area, see the whole app.
+        $breedBreakdown = Chicken::with('breed')
+            ->when(! $request->user()->is_admin, fn ($query) => $query->where('user_id', $request->user()->id))
             ->get()
             ->groupBy(fn (Chicken $chicken) => $chicken->breed?->name ?? 'Unknown')
             ->map->count()
-            ->sortDesc()
-            ->take(5);
+            ->sortDesc();
 
         return compact('stats', 'recent', 'breedBreakdown');
     }
