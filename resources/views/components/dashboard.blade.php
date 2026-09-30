@@ -53,20 +53,29 @@
     @endif
 </div>
 
-{{-- Stats --}}
+{{-- Stat cards, each titled with the same pill used for the gender tags --}}
 <div class="mb-8 grid grid-cols-2 gap-4 lg:grid-cols-4">
     @foreach ([
-        ['label' => 'Chickens', 'value' => $stats['total'], 'icon' => 'egg'],
-        ['label' => 'Males', 'value' => $stats['males'], 'icon' => 'feather'],
-        ['label' => 'Females', 'value' => $stats['females'], 'icon' => 'feather'],
-        ['label' => 'Breeds', 'value' => $stats['breeds'], 'icon' => 'book'],
+        ['label' => 'Chickens', 'value' => $stats['total'], 'icon' => 'egg', 'symbol' => null, 'tone' => 'bg-brand-100 text-brand-800'],
+        ['label' => 'Male', 'value' => $stats['males'], 'icon' => null, 'symbol' => '♂', 'tone' => 'bg-gender-male/10 text-gender-male'],
+        ['label' => 'Female', 'value' => $stats['females'], 'icon' => null, 'symbol' => '♀', 'tone' => 'bg-gender-female/10 text-gender-female'],
+        ['label' => 'Breeds', 'value' => $stats['breeds'], 'icon' => 'book', 'symbol' => null, 'tone' => 'bg-cyan-100 text-cyan-700'],
     ] as $card)
         <div class="rounded-xl border border-surface-border bg-surface p-4 shadow-sm">
-            <div class="mb-2 flex items-center gap-2 text-stone-500">
-                <x-icon :name="$card['icon']" class="h-4 w-4" />
-                <span class="text-sm font-medium">{{ $card['label'] }}</span>
-            </div>
-            <p class="text-3xl font-bold text-stone-900">{{ $card['value'] }}</p>
+            <span @class([
+                'inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold',
+                $card['tone'],
+            ])>
+                @if ($card['symbol'])
+                    <span aria-hidden="true">{{ $card['symbol'] }}</span>
+                @else
+                    <x-icon :name="$card['icon']" class="h-3.5 w-3.5" />
+                @endif
+
+                {{ $card['label'] }}
+            </span>
+
+            <p class="mt-3 text-3xl font-bold text-stone-900">{{ $card['value'] }}</p>
         </div>
     @endforeach
 </div>
