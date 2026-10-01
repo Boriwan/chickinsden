@@ -39,6 +39,6 @@ class DatabaseSeeder extends Seeder
             Breed::firstOrCreate(['name' => $breed['name']], ['description' => $breed['description']]);
         }
 
-        Chicken::factory(12)->create();
+        Chicken::factory(20)->create();
     }
 }
