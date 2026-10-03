@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Concerns\FlashesNotifications;
 use App\Models\Breed;
 use App\Models\Chicken;
 use Illuminate\Http\RedirectResponse;
@@ -10,6 +11,8 @@ use Illuminate\View\View;
 
 class ChickenController extends Controller
 {
+    use FlashesNotifications;
+
     /**
      * Validation rules shared by store() and update().
      *
@@ -59,8 +62,11 @@ class ChickenController extends Controller
             'user_id' => $request->user()->id,
         ]);
 
-        return $this->redirectToIndex($request)
-            ->with('status', "{$chicken->name} was added.");
+        return $this->notify(
+            $this->redirectToIndex($request),
+            "{$chicken->name} was added.",
+            'created',
+        );
     }
 
     /**
@@ -97,8 +103,11 @@ class ChickenController extends Controller
 
         $chicken->update($request->validate($this->rules()));
 
-        return $this->redirectToIndex($request)
-            ->with('status', "{$chicken->name} was updated.");
+        return $this->notify(
+            $this->redirectToIndex($request),
+            "{$chicken->name} was updated.",
+            'updated',
+        );
     }
 
     /**
@@ -111,8 +120,11 @@ class ChickenController extends Controller
         $name = $chicken->name;
         $chicken->delete();
 
-        return $this->redirectToIndex($request)
-            ->with('status', "{$name} was deleted.");
+        return $this->notify(
+            $this->redirectToIndex($request),
+            "{$name} was deleted.",
+            'deleted',
+        );
     }
 
     /**

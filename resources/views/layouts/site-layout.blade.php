@@ -54,21 +54,32 @@
         </nav>
     </header>
 
-    @if (session('status'))
-        <div class="mx-auto w-full max-w-6xl px-5 pt-5">
-            <div class="rounded-lg border border-brand-200 bg-brand-50 px-4 py-3 text-sm font-medium text-brand-700">
-                {{ session('status') }}
-            </div>
-        </div>
-    @endif
+    {{--
+    Notifications, stacked in the bottom right.
 
-    @if ($errors->any() && ! $errors->has('userDeletion'))
-        <div class="mx-auto w-full max-w-6xl px-5 pt-5">
-            <div class="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700">
-                {{ $errors->first() }}
-            </div>
-        </div>
-    @endif
+    Validation errors are deliberately absent: they render next to their own
+    field in the form that caused them, and this banner used to repeat the
+    first one in a place unrelated to the field it belonged to.
+
+    The auth flows and the profile page still flash a plain 'status' with no
+    action, so those arrive here without an icon rather than being dropped.
+--}}
+@if (session('notice') || session('status') || session('error'))
+    <div class="pointer-events-none fixed inset-x-0 bottom-0 z-50 flex flex-col items-center gap-3 p-4 sm:inset-x-auto sm:right-0 sm:items-end sm:p-6">
+        {{-- A redirect carries one toast; the older singular keys are kept for the auth and profile flows. --}}
+        @foreach ((array) session('notice', []) as $toast)
+            <x-notification :message="$toast['message']" :action="$toast['action'] ?? 'created'" />
+        @endforeach
+
+        @if (session('error'))
+            <x-notification :message="session('error')" action="error" />
+        @endif
+
+        @if (session('status'))
+            <x-notification :message="session('status')" action="notice" />
+        @endif
+    </div>
+@endif
 
     <main class="flex-1">
         {{ $slot }}
