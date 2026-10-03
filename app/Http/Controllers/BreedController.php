@@ -2,66 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Breed;
+use Illuminate\View\View;
 
 class BreedController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * List every breed as a reference overview.
+     *
+     * No chicken counts here: the wiki explains breeds, it is not a report on
+     * the flock. The admin area carries the counts.
      */
-    public function index()
+    public function index(): View
     {
-        $breeds = Breed::all();
+        $breeds = Breed::orderBy('name')->get();
 
         return view('breeds.index', compact('breeds'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show a single breed entry.
+     *
+     * Writing lives in Admin\BreedController. Breeds are shared by the whole
+     * app rather than owned by a user, so only admins create or change them.
      */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Breed $breed)
+    public function show(Breed $breed): View
     {
         return view('breeds.show', compact('breed'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

@@ -55,7 +55,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::get('/admin/chickens', [AdminChickenController::class, 'index'])->name('admin.chickens.index');
 
-    Route::get('/admin/breeds', [AdminBreedController::class, 'index'])->name('admin.breeds.index');
+    Route::resource('admin/breeds', AdminBreedController::class)
+        ->except('show')
+        ->names('admin.breeds');
 });
 
 require __DIR__.'/auth.php';
