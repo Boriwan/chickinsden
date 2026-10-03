@@ -21,7 +21,7 @@
                         @foreach ($breeds as $breed)
                             <tr class="transition hover:bg-brand-50/50">
                                 <td class="px-4 py-3 text-stone-500">{{ $breed->id }}</td>
-                                <td class="px-4 py-3 font-medium text-stone-900">{{ $breed->name }}</td>
+                                <td class="px-4 py-3 font-medium text-stone-900 underline"> <a href="{{ route('breeds.show', $breed) }}">{{ $breed->name }}</a></td>
                                 <td class="px-4 py-3 text-stone-600">{{ $breed->description }}</td>
                             </tr>
                         @endforeach
