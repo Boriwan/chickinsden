@@ -1,6 +1,7 @@
 @props([
     'chicken' => null,
     'breeds',
+    'traits',
     'cancelUrl' => null,
 ])
 
@@ -22,6 +23,7 @@
 @endphp
 
 <form method="POST"
+    enctype="multipart/form-data"
     action="{{ $editing ? route('chickens.update', $chicken) : route('chickens.store') }}"
     class="space-y-4 rounded-xl border border-surface-border bg-surface p-6 shadow-sm">
     @csrf
@@ -97,6 +99,40 @@
             @enderror
         </div>
     </div>
+
+    {{-- Photo. Only sent when a file is actually chosen, so an untouched edit keeps the current one. --}}
+    <div>
+        <label for="image" class="mb-1.5 block text-sm font-medium text-stone-700">Photo</label>
+
+        <input type="file" name="image" id="image" accept="image/jpeg,image/png,image/webp,image/heic,image/heif"
+            class="block w-full cursor-pointer rounded-lg text-sm text-stone-600 shadow-sm file:mr-3 file:cursor-pointer file:rounded-l-lg file:border-0 file:bg-brand-100 file:px-4 file:py-2.5 file:text-sm file:font-semibold file:text-brand-800 hover:file:bg-brand-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500">
+
+        @error('image')
+            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+        @enderror
+
+        <p class="mt-1 text-xs text-stone-400">JPEG, PNG, WebP or HEIC, up to 8 MB.</p>
+
+        @if ($chicken?->image)
+            <div class="mt-3 flex items-center gap-3">
+                <img src="{{ asset('storage/' . $chicken->image) }}" alt="Current photo of {{ $chicken->name }}"
+                    class="h-20 w-20 rounded-lg border border-surface-border object-cover">
+
+                <p class="text-xs text-stone-500">Current photo &mdash; choose a new file to replace it.</p>
+            </div>
+        @endif
+    </div>
+
+    <x-trait-picker :available-traits="$traits"
+        :selected-ids="old('traits', $chicken?->traits->pluck('id')->all() ?? [])" />
+
+    @error('traits')
+        <p class="text-sm text-red-600">{{ $message }}</p>
+    @enderror
+
+    @error('traits.*')
+        <p class="text-sm text-red-600">{{ $message }}</p>
+    @enderror
 
     <div class="flex justify-end gap-3 pt-2">
         @if ($cancelUrl)

@@ -26,7 +26,7 @@
         </div>
 
         <div class="mb-6 flex flex-wrap items-center gap-3">
-            <h1 class="text-3xl font-bold text-stone-900">{{ $chicken->name }}</h1>
+            <x-page-heading icon="egg" heading-class="">{{ $chicken->name }}</x-page-heading>
 
             <span @class([
                 'rounded-full px-2.5 py-1 text-xs font-semibold',
@@ -36,13 +36,14 @@
                 {{ $chicken->gender === 'male' ? '♂ Male' : '♀ Female' }}
             </span>
 
-            <span>
-                @foreach ($chicken->traits as $trait)
-                    <span class="rounded-full underline bg-surface px-2.5 py-1 text-xs font-semibold text-stone-500">
-                        {{ $trait->name }}
-                    </span>
-                @endforeach
-            </span>
+            {{-- Each trait links to the chicken list filtered to that trait. --}}
+            @foreach ($chicken->traits as $trait)
+                <a href="{{ route('chickens.index', ['trait' => $trait->id]) }}"
+                    title="See every chicken with the {{ $trait->name }} trait"
+                    class="rounded-full bg-brand-100 px-2.5 py-1 text-xs font-semibold text-brand-800 underline-offset-2 transition hover:bg-brand-200 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-800">
+                    {{ $trait->name }}
+                </a>
+            @endforeach
 
         </div>
 
@@ -64,8 +65,9 @@
                     <div class="flex items-center justify-between gap-4 p-4">
                         <dt class="text-sm text-stone-500">Breed</dt>
                         <dd class="font-medium">
+                            {{-- Same pill as the Breeds stat card, minus the icon. --}}
                             <a href="{{ route('breeds.show', $chicken->breed_id) }}"
-                                class="text-brand-600 hover:underline">
+                                class="inline-block rounded-full bg-cyan-100 px-2.5 py-1 text-xs font-semibold text-cyan-700 transition hover:bg-cyan-200 hover:underline">
                                 {{ $chicken->breed?->name ?? 'Unknown' }}
                             </a>
                         </dd>
