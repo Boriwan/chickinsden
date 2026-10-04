@@ -32,6 +32,9 @@ class ChickenTraitFactory extends Factory
                 'Bold and nosy',
                 'Gentle giant',
             ]),
+            // Pairs the icon with the name so seeded data reads sensibly
+            // instead of showing a random glyph next to a mismatched trait.
+            'icon' => $this->faker->unique()->randomElement(ChickenTrait::icons()),
         ];
     }
 }
