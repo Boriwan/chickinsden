@@ -12,7 +12,8 @@
                 <p class="text-lg text-stone-600">Here is what is happening with your den.</p>
             </div>
 
-            <x-dashboard :stats="$stats" :recent="$recent" :breed-breakdown="$breedBreakdown" />
+            <x-dashboard :stats="$stats" :recent="$recent" :breed-breakdown="$breedBreakdown"
+                :trait-breakdown="$traitBreakdown" />
         @else
             <div class="mx-auto max-w-3xl text-center">
                 <div class="mb-6 flex items-center justify-center gap-3">

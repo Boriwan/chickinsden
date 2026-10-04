@@ -24,13 +24,24 @@ class WelcomeController extends Controller
     }
 
     /**
-     * Summarise the signed-in user's own chickens for the dashboard.
+     * Summarise the dashboard for the signed-in user.
+     *
+     * Ordinary users see their own den only. Admins see the whole app, because
+     * they can already reach every chicken from the admin area, and a dashboard
+     * that quietly hid most of it from them would be misleading. Every count on
+     * the page goes through the same scope so the cards can never disagree with
+     * the charts beside them.
      *
      * @return array<string, mixed>
      */
     private function denSummary(Request $request): array
     {
-        $chickens = Chicken::where('user_id', $request->user()->id);
+        $scope = fn ($query) => $query->when(
+            ! $request->user()->is_admin,
+            fn ($q) => $q->where('user_id', $request->user()->id)
+        );
+
+        $chickens = $scope(Chicken::query());
 
         $stats = [
             'total' => (clone $chickens)->count(),
@@ -45,15 +56,33 @@ class WelcomeController extends Controller
             ->take(5)
             ->get();
 
-        // Ordinary users see the breeds of their own den; admins, who can
-        // already see every chicken in the admin area, see the whole app.
-        $breedBreakdown = Chicken::with('breed')
-            ->when(! $request->user()->is_admin, fn ($query) => $query->where('user_id', $request->user()->id))
+        // Keyed by breed id so the chart legend can link to the filtered list.
+        $breedBreakdown = $scope(Chicken::query()->with('breed'))
             ->get()
-            ->groupBy(fn (Chicken $chicken) => $chicken->breed?->name ?? 'Unknown')
-            ->map->count()
-            ->sortDesc();
+            ->groupBy('breed_id')
+            ->map(fn ($chickens, $breedId) => [
+                'id' => (int) $breedId,
+                'label' => $chickens->first()->breed?->name ?? 'Unknown',
+                'count' => $chickens->count(),
+            ])
+            ->sortByDesc('count')
+            ->values();
 
-        return compact('stats', 'recent', 'breedBreakdown');
+        // A chicken can carry several traits, so these counts are trait
+        // assignments and add up to more than the number of chickens.
+        $traitBreakdown = $scope(Chicken::query()->with('traits'))
+            ->get()
+            ->flatMap(fn (Chicken $chicken) => $chicken->traits
+                ->map(fn ($trait) => ['id' => $trait->id, 'label' => $trait->name]))
+            ->groupBy('id')
+            ->map(fn ($assignments) => [
+                'id' => $assignments->first()['id'],
+                'label' => $assignments->first()['label'],
+                'count' => $assignments->count(),
+            ])
+            ->sortByDesc('count')
+            ->values();
+
+        return compact('stats', 'recent', 'breedBreakdown', 'traitBreakdown');
     }
 }
