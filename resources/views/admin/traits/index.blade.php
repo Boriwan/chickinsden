@@ -9,7 +9,7 @@
             separate form page.
         --}}
         <div class="mb-6 rounded-xl border border-surface-border bg-surface p-4 shadow-sm">
-            <form method="POST" action="{{ route('admin.traits.store') }}" class="flex flex-wrap items-end gap-3">
+            <form method="POST" action="{{ route('admin.traits.store') }}">
                 @csrf
 
                 <div class="min-w-56 flex-1">
@@ -26,10 +26,14 @@
                     @enderror
                 </div>
 
-                <x-button type="submit">
-                    <x-icon name="plus" class="h-4 w-4" />
-                    Add trait
-                </x-button>
+                <x-partials.icon-picker class="mt-4" />
+
+                <div class="mt-4 flex flex-wrap items-center justify-end gap-3">
+                    <x-button type="submit">
+                        <x-icon name="plus" class="h-4 w-4" />
+                        Add trait
+                    </x-button>
+                </div>
             </form>
         </div>
 
@@ -44,7 +48,7 @@
                 <table class="w-full text-left text-sm">
                     <thead class="border-b border-surface-border bg-brand-50 text-xs uppercase tracking-wide text-brand-700">
                         <tr>
-                            <th class="px-4 py-3 font-semibold">Name</th>
+                            <th colspan="2" class="px-4 py-3 font-semibold">Name and icon</th>
                             <th class="px-4 py-3 font-semibold">Chickens</th>
                             <th class="px-4 py-3 font-semibold">Actions</th>
                         </tr>
@@ -53,21 +57,24 @@
                     <tbody class="divide-y divide-surface-border">
                         @foreach ($traits as $trait)
                             <tr class="transition hover:bg-brand-50/50">
-                                <td class="px-4 py-3 font-medium text-stone-900">
-                                    <form method="POST" action="{{ route('admin.traits.update', $trait) }}"
-                                        class="flex items-center gap-2">
+                                {{-- Name and icon share one form, so a rename and an icon change are saved
+                                     together by the same tick. --}}
+                                <td colspan="2" class="px-4 py-3">
+                                    <form method="POST" action="{{ route('admin.traits.update', $trait) }}">
                                         @csrf
                                         @method('PUT')
 
-                                        {{-- group-focus-within reveals the tick only once the row is being edited. --}}
-                                        <div class="group flex items-center gap-2">
+                                        <div class="group flex flex-wrap items-start gap-3">
                                             <input type="text" name="name" value="{{ $trait->name }}" required
                                                 maxlength="50"
                                                 aria-label="Rename {{ $trait->name }}"
-                                                class="w-full max-w-xs rounded-lg border border-transparent bg-transparent px-2 py-1 font-medium shadow-sm transition focus:border-stone-300 focus:bg-surface focus:ring-2 focus:ring-brand-500">
+                                                class="w-full max-w-xs rounded-lg border border-transparent bg-transparent px-2 py-1 font-medium text-stone-900 shadow-sm transition focus:border-stone-300 focus:bg-surface focus:ring-2 focus:ring-brand-500">
+
+                                            <x-partials.icon-picker :selected="$trait->icon" label=""
+                                                class="w-auto flex-1" />
 
                                             <button type="submit" aria-label="Save {{ $trait->name }}"
-                                                class="shrink-0 rounded-lg p-1.5 text-stone-500 opacity-0 transition group-focus-within:opacity-100 hover:bg-stone-100 hover:text-stone-900 focus-visible:opacity-100">
+                                                class="mt-0.5 shrink-0 rounded-lg p-1.5 text-stone-500 opacity-0 transition group-focus-within:opacity-100 hover:bg-stone-100 hover:text-stone-900 focus-visible:opacity-100">
                                                 <x-icon name="check" class="h-4 w-4" />
                                             </button>
                                         </div>

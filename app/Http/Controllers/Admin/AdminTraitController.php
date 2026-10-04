@@ -108,6 +108,11 @@ class AdminTraitController extends Controller
             $unique = $unique->ignore($chickenTrait->id);
         }
 
-        return ['name' => ['required', 'string', 'max:50', $unique]];
+        return [
+            'name' => ['required', 'string', 'max:50', $unique],
+            // Sourced from the model, so a trait can never store an icon the
+            // <x-icon> map has no glyph for.
+            'icon' => ['nullable', 'string', Rule::in(ChickenTrait::icons())],
+        ];
     }
 }
