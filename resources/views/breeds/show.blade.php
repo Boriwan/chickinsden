@@ -26,7 +26,7 @@
             @endif
         </div>
 
-        <h1 class="text-3xl font-bold text-stone-900">{{ $breed->name }}</h1>
+        <x-page-heading icon="book" heading-class="">{{ $breed->name }}</x-page-heading>
 
         <p class="mt-4 text-stone-600">{{ $breed->description }}</p>
     </div>

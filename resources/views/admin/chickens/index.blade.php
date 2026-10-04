@@ -1,7 +1,7 @@
 <x-site-layout>
     <div class="mx-auto max-w-6xl px-5 py-8">
         <div class="mb-6 flex flex-wrap items-center justify-between gap-4">
-            <h1 class="text-3xl font-bold text-stone-900">All chickens</h1>
+            <x-page-heading icon="egg" heading-class="">All chickens</x-page-heading>
 
             <x-button href="{{ route('chickens.create') }}">
                 <x-icon name="plus" class="h-4 w-4" />
