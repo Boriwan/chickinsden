@@ -1,7 +1,11 @@
 @props([
+    // Each entry is ['id' => int|null, 'label' => string, 'count' => int].
+    // The id is what makes a legend row linkable to the filtered chicken list.
     'data',
     'max' => 6,
     'unit' => 'chicken',
+    'legendHeading' => 'Breed',
+    'linkRoute' => null,
 ])
 
 @php
@@ -74,36 +78,33 @@
         C 16 124 24 96 38 62
         C 50 30 72 8 100 8 Z';
 
-    // Shades drawn from the app's own brand ramp, so the chart stays in the
-    // same palette as the header and buttons.
+    // Cyan shades, because cyan is what the app uses for breeds everywhere
+    // else: the breed pills, the breed stat card and the trait-free badges.
     $palette = [
-        '#f99d34',
-        '#f9b04a',
-        '#fdc078',
-        '#ffd9a3',
-        '#e88c2a',
-        '#c96f14',
-        '#a8560c',
+        '#22d3ee',
+        '#06b6d4',
+        '#67e8f9',
+        '#0891b2',
+        '#155e75',
+        '#0e7490',
+        '#164e63',
     ];
 
-    $total = (int) $data->sum();
+    $total = (int) $data->sum('count');
 
-    // sortDesc() keeps the breed names as keys, so read the labels and the
-    // counts out in the same order. Calling ->values() on the collection would
-    // drop the names and leave only the numeric keys behind.
-    $ordered = $data->sortDesc();
-    $labels = $ordered->keys()->values()->all();
-    $counts = $ordered->values()->all();
+    $ordered = $data->sortByDesc('count')->values();
 
     $items = [];
-    foreach (array_slice($labels, 0, $max) as $i => $label) {
-        $items[] = ['label' => $label, 'count' => (int) $counts[$i]];
+    foreach ($ordered->take($max) as $entry) {
+        $items[] = ['id' => $entry['id'] ?? null, 'label' => $entry['label'], 'count' => (int) $entry['count']];
     }
 
-    if (count($counts) > $max) {
+    // The tail bucket has no single id, so its legend row stays unlinked.
+    if ($ordered->count() > $max) {
         $items[] = [
+            'id' => null,
             'label' => 'Other',
-            'count' => (int) array_sum(array_slice($counts, $max)),
+            'count' => (int) $ordered->slice($max)->sum('count'),
         ];
     }
 
@@ -168,12 +169,13 @@
         $h = round(max($r['h'] - 2 * $gap, 1), 2);
 
         $blocks[] = [
+            'id' => $r['item']['id'],
             'label' => $r['item']['label'],
             'count' => $r['item']['count'],
             'pct' => $total > 0 ? round($r['item']['count'] / $total * 100, 1) : 0,
             // Light neutral for the tail bucket, so it never collides with a
             // real breed when the palette wraps around.
-            'color' => $isOther ? '#d6d3d1' : $palette[$i % count($palette)],
+            'color' => $isOther ? '#9ec6c1' : $palette[$i % count($palette)],
             'x' => $x,
             'y' => $y,
             'w' => $w,
@@ -231,19 +233,35 @@
         <div
             class="flex items-center gap-2.5 border-b border-surface-border pb-1.5 text-[10px] font-semibold uppercase tracking-wide text-stone-400">
             <span class="h-2.5 w-2.5 shrink-0"></span>
-            <span class="min-w-0 flex-1">Breed</span>
+            <span class="min-w-0 flex-1">{{ $legendHeading }}</span>
             <span class="w-9 shrink-0 text-right">Birds</span>
             <span class="w-12 shrink-0 text-right">Share</span>
         </div>
 
         <ul class="mt-1.5 space-y-1.5 text-sm">
             @foreach ($blocks as $block)
-                <li class="flex items-center gap-2.5">
-                    <span class="h-2.5 w-2.5 shrink-0 rounded-full"
-                        style="background: {{ $block['color'] }}"></span>
-                    <span class="min-w-0 flex-1 truncate font-medium text-stone-700">{{ $block['label'] }}</span>
-                    <span class="w-9 shrink-0 text-right tabular-nums text-stone-500">{{ $block['count'] }}</span>
-                    <span class="w-12 shrink-0 text-right tabular-nums text-stone-400">{{ $block['pct'] }}%</span>
+                @php
+                    // Only the legend links. Making the slices clickable would
+                    // collide with their hover-to-inspect behaviour, and inside
+                    // the silhouette a slice is far too small for a hit target
+                    // that would not be ambiguous. The "Other" bucket spans
+                    // several breeds, so it has no single id to link to.
+                    $href = $linkRoute !== null && $block['id'] !== null
+                        ? route($linkRoute, ['breed' => $block['id']])
+                        : null;
+                @endphp
+
+                <li>
+                    @if ($href)
+                        <a href="{{ $href }}"
+                            class="-mx-1.5 flex items-center gap-2.5 rounded-lg px-1.5 py-1 transition hover:bg-cyan-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500">
+                            @include('components.partials.legend-row', ['block' => $block])
+                        </a>
+                    @else
+                        <div class="flex items-center gap-2.5">
+                            @include('components.partials.legend-row', ['block' => $block])
+                        </div>
+                    @endif
                 </li>
             @endforeach
         </ul>
