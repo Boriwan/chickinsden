@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Breed;
 use App\Models\Chicken;
+use App\Models\ChickenTrait;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -40,6 +41,8 @@ class DatabaseSeeder extends Seeder
         foreach ($breeds as $breed) {
             Breed::firstOrCreate(['name' => $breed['name']], ['description' => $breed['description']]);
         }
+
+        ChickenTrait::factory(25)->create();
 
         Chicken::factory(20)->create();
     }
