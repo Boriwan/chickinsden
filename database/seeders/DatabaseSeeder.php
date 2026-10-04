@@ -18,9 +18,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        //Test admin user
+        // Test admin user
         User::factory()->create(['email' => 'boris.bocek@radnom.cz', 'name' => 'Boris Admin', 'password' => 'password', 'is_admin' => true]);
-        //Test logged in user
+        // Test logged in user
         User::factory()->create(['email' => 'boris.bocek2@radnom.cz', 'name' => 'Boris User', 'password' => 'password', 'is_admin' => false]);
 
         User::factory(10)->create();
@@ -38,12 +38,16 @@ class DatabaseSeeder extends Seeder
             ['name' => 'ISA Brown', 'description' => 'A modern commercial strain famous for very high egg yield.'],
         ];
 
-        foreach ($breeds as $breed) {
+        foreach ($breeds as $breed) { 
             Breed::firstOrCreate(['name' => $breed['name']], ['description' => $breed['description']]);
         }
 
+        $chickens = Chicken::factory(20)->create();
+
         ChickenTrait::factory(25)->create();
 
-        Chicken::factory(20)->create();
+        foreach ($chickens as $chicken) {
+            $chicken->traits()->attach(ChickenTrait::inRandomOrder()->take(rand(0, 3))->pluck('id')->toArray());
+        }
     }
 }

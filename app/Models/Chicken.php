@@ -6,6 +6,7 @@ use Database\Factories\ChickenFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Chicken extends Model
 {
@@ -17,6 +18,11 @@ class Chicken extends Model
     public function breed(): BelongsTo
     {
         return $this->belongsTo(Breed::class);
+    }
+
+    public function traits(): BelongsToMany
+    {
+        return $this->belongsToMany(ChickenTrait::class, 'chicken_trait', 'chicken_id', 'trait_id');
     }
 
     public function user(): BelongsTo
