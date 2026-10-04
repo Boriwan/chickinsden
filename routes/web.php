@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminBreedController;
 use App\Http\Controllers\Admin\AdminChickenController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AdminTraitController;
 use App\Http\Controllers\BreedController;
 use App\Http\Controllers\ChickenController;
 use App\Http\Controllers\Userzone\ProfileController;
@@ -58,6 +59,11 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('admin/breeds', AdminBreedController::class)
         ->except('show')
         ->names('admin.breeds');
+
+    Route::resource('admin/traits', AdminTraitController::class)
+        ->except('show')
+        ->parameters(['traits' => 'chickenTrait'])
+        ->names('admin.traits');
 });
 
 require __DIR__.'/auth.php';
