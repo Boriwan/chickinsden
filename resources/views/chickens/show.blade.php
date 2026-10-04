@@ -41,6 +41,8 @@
                 <a href="{{ route('chickens.index', ['trait' => $trait->id]) }}"
                     title="See every chicken with the {{ $trait->name }} trait"
                     class="rounded-full bg-brand-100 px-2.5 py-1 text-xs font-semibold text-brand-800 underline-offset-2 transition hover:bg-brand-200 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-800">
+                    <x-icon :name="$trait->iconOrDefault()" class="h-3 w-3 shrink-0" />
+
                     {{ $trait->name }}
                 </a>
             @endforeach

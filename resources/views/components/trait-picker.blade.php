@@ -40,6 +40,8 @@
                         @checked($selected)
                         x-on:change="on = $el.checked">
 
+                    <x-icon :name="$trait->iconOrDefault()" class="h-3.5 w-3.5 shrink-0" />
+
                     {{ $trait->name }}
 
                     <span class="-mr-1 text-lg leading-none" x-show="on" x-cloak

@@ -118,7 +118,9 @@
                                 <div class="mt-1 flex flex-wrap gap-1.5">
                                     @foreach ($chicken->traits as $trait)
                                         <span
-                                            class="rounded-full bg-brand-100 px-2 py-0.5 text-xs font-semibold text-brand-800">
+                                            class="inline-flex items-center gap-1 rounded-full bg-brand-100 px-2 py-0.5 text-xs font-semibold text-brand-800">
+                                            <x-icon :name="$trait->iconOrDefault()" class="h-3 w-3 shrink-0" />
+
                                             {{ $trait->name }}
                                         </span>
                                     @endforeach
@@ -127,6 +129,12 @@
                         </div>
                     </a>
                 @endforeach
+            </div>
+        @endif
+
+        @if ($chickens->hasPages())
+            <div class="mt-6">
+                {{ $chickens->links() }}
             </div>
         @endif
     </div>
