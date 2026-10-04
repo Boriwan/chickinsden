@@ -212,7 +212,10 @@ class ChickenController extends Controller
             'trait' => $trait,
         ]);
 
-        $chickens = $query->latest()->get();
+        // withQueryString() carries ?gender, ?breed and ?trait onto each page link.
+        // Without it a user who filtered down to one breed and then opened
+        // page 2 would silently be shown the unfiltered list.
+        $chickens = $query->latest()->paginate(15)->withQueryString();
 
         return view('chickens.index', compact('chickens', 'filters'));
     }
