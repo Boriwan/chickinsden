@@ -2,16 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Attributes\Guarded;
+use Database\Factories\ChickenTraitFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-#[Guarded([])]
 class ChickenTrait extends Model
 {
-    /** @use HasFactory<\Database\Factories\ChickenTraitFactory> */
+    /** @use HasFactory<ChickenTraitFactory> */
     use HasFactory;
+
+    protected $fillable = ['name'];
 
     public function chickens(): BelongsToMany
     {

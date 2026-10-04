@@ -38,13 +38,13 @@ class DatabaseSeeder extends Seeder
             ['name' => 'ISA Brown', 'description' => 'A modern commercial strain famous for very high egg yield.'],
         ];
 
-        foreach ($breeds as $breed) { 
+        foreach ($breeds as $breed) {
             Breed::firstOrCreate(['name' => $breed['name']], ['description' => $breed['description']]);
         }
 
         $chickens = Chicken::factory(20)->create();
 
-        ChickenTrait::factory(25)->create();
+        ChickenTrait::factory(12)->create();
 
         foreach ($chickens as $chicken) {
             $chicken->traits()->attach(ChickenTrait::inRandomOrder()->take(rand(0, 3))->pluck('id')->toArray());

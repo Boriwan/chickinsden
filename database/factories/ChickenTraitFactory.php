@@ -18,7 +18,20 @@ class ChickenTraitFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->word(),
+            'name' => $this->faker->unique()->randomElement([
+                'Bold',
+                'Curious',
+                'Friendly',
+                'Loud',
+                'Playful',
+                'Shy',
+                'Calm',
+                'Broody',
+                'Chatty',
+                'Skittish',
+                'Bold and nosy',
+                'Gentle giant',
+            ]),
         ];
     }
 }
