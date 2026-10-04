@@ -35,6 +35,15 @@
             ])>
                 {{ $chicken->gender === 'male' ? '♂ Male' : '♀ Female' }}
             </span>
+
+            <span>
+                @foreach ($chicken->traits as $trait)
+                    <span class="rounded-full underline bg-surface px-2.5 py-1 text-xs font-semibold text-stone-500">
+                        {{ $trait->name }}
+                    </span>
+                @endforeach
+            </span>
+
         </div>
 
         <div class="grid items-start gap-6 sm:grid-cols-[16rem_1fr]">
@@ -85,6 +94,8 @@
                         <dt class="text-sm text-stone-500">Weight</dt>
                         <dd class="font-medium">{{ ucfirst($chicken->weight) }}</dd>
                     </div>
+
+
                 </dl>
             </div>
         </div>
